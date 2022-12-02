@@ -16,7 +16,7 @@ body {
 
 header {
   width: 100%;
-  position: fixed;
+  /* position: fixed; */
   display: flex;
   padding: 0.5rem 1rem;
   align-items: center;
@@ -170,4 +170,15 @@ a.sign-up:hover {
     color: #1c1c1c;
     background-color: #fff1da;
   }
+}
+
+
+footer {
+    background-color: #1c1c1c;
+    text-align: center;
+    color: white;
+    padding: 0.5rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
