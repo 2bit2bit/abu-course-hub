@@ -61,7 +61,7 @@ header ul li a {
 
 header ul li a:hover,
 header ul li a:active,
-header ul li a.active{
+header ul li a.active {
   background-color: #fff1da;
 }
 
@@ -70,13 +70,17 @@ header ul .sign-up {
   background-color: #1c1c1c;
 }
 
+header ul .sign-up.active {
+  color: #1c1c1c;
+  background-color: #fff1da;
+}
+
 a.sign-up:hover {
   color: #1c1c1c;
   background-color: #fff1da;
 }
 
 @media only screen and (max-width: 600px) {
-    
   header nav {
     display: none;
   }
@@ -168,23 +172,27 @@ a.sign-up:hover {
     background-color: #1c1c1c;
   }
 
+  .mobile-nav .sign-up.active {
+    color: #1c1c1c;
+    background-color: #fff1da;
+  }
+
   .mobile-nav a.sign-up:hover {
     color: #1c1c1c;
     background-color: #fff1da;
   }
-} 
+}
 
 main {
   padding: 1rem;
 }
 
-
 footer {
-    background-color: #1c1c1c;
-    text-align: center;
-    color: white;
-    padding: 0.5rem;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+  background-color: #1c1c1c;
+  text-align: center;
+  color: white;
+  padding: 0.5rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

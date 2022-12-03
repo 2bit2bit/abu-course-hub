@@ -10,7 +10,7 @@
           </ul>
           <ul class="sign-in__login">
             <li><a href="#">Sign in</a></li>
-            <li><a class="sign-up" href="#">Sign Up</a></li>
+            <li><a class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>" href="/signup">Sign Up</a></li>
           </ul>
         </nav>
     </div>
@@ -28,7 +28,7 @@
             </ul>
             <ul class="sign-in__login">
               <li><a href="#">Sign in</a></li>
-              <li><a class="sign-up" href="#">Sign Up</a></li>
+              <li><a class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>" href="/signup">Sign Up</a></li>
             </ul>
           </nav>
   
