@@ -9,7 +9,7 @@
             <li><a href="#">Articles</a></li>
           </ul>
           <ul class="sign-in__login">
-            <li><a href="#">Sign in</a></li>
+            <li><a class="<%= path === '/login' ? 'active' : ' ' %>" href="/login">Login</a></li>
             <li><a class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>" href="/signup">Sign Up</a></li>
           </ul>
         </nav>
@@ -27,14 +27,14 @@
               <li><a href="#">Articles</a></li>
             </ul>
             <ul class="sign-in__login">
-              <li><a href="#">Sign in</a></li>
+              <li><a class="<%= path === '/login' ? 'active' : ' ' %>" href="/login">Login</a></li>
               <li><a class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>" href="/signup">Sign Up</a></li>
             </ul>
           </nav>
   
           <div class="mobile-nav_toggle">
             <button class="mobile-nav_toggle-btn">
-              <img src="img/menu.svg" alt="" />
+              <img src="img/menu.svg" alt="toggle-btn" />
             </button>
           </div>
         </header>
