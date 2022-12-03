@@ -4,7 +4,7 @@ const blogController = require('../controllers/blog')
 
 const router = express.Router()
 
-router.use('/', blogController.getIndex)
+router.get('/',blogController.getIndex)
 
 
 module.exports = router

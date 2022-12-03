@@ -1,3 +1,6 @@
 exports.getIndex = (req, res, next) => {
-    res.send('hello world')
-}
+  res.render("blog/index", {
+    pageTitle: "Alticles",
+    path: "/home",
+  });
+};

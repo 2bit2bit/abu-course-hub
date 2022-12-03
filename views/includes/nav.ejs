@@ -5,7 +5,7 @@
       <nav>
         <nav>
           <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a class="<%= path === '/home' ? 'active' : '' %>" href="/">Home</a></li>
             <li><a href="#">Articles</a></li>
           </ul>
           <ul class="sign-in__login">
@@ -17,13 +17,13 @@
   
   
       <header>
-          <a href="index.html" class="logo">
+          <a href="/" class="logo">
             <img src="img/alticle_logo.jpg" alt="alticle_logo" /><br />
           </a>
     
           <nav>
             <ul>
-              <li><a href="index.html">Home</a></li>
+              <li><a class="<%= path === '/home' ? 'active' : '' %>" href="/">Home</a></li>
               <li><a href="#">Articles</a></li>
             </ul>
             <ul class="sign-in__login">

@@ -60,7 +60,8 @@ header ul li a {
 }
 
 header ul li a:hover,
-header ul li a:active {
+header ul li a:active,
+header ul li a.active{
   background-color: #fff1da;
 }
 
@@ -157,7 +158,8 @@ a.sign-up:hover {
   }
 
   .mobile-nav ul li a:hover,
-  .mobile-nav ul li a:active {
+  .mobile-nav ul li a:active,
+  .mobile-nav ul li a.active {
     background-color: #fff1da;
   }
 
@@ -170,6 +172,10 @@ a.sign-up:hover {
     color: #1c1c1c;
     background-color: #fff1da;
   }
+} 
+
+main {
+  padding: 1rem;
 }
 
 
