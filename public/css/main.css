@@ -21,6 +21,7 @@ header {
   padding: 0.5rem 1rem;
   align-items: center;
   background-color: white;
+  box-shadow: 0px 0px 4px 4px #1c1c1c10;
 }
 header .logo {
   width: 10%;
