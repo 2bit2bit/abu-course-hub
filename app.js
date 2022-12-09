@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const session = require('express-session'); 
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 require("dotenv").config();
 
@@ -12,9 +13,15 @@ const userModel = require('./models/user')
 
 const app = express();
 
+
 const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
 const SESSION_SECRET = process.env.SESSION_SECRET;
+
+const store = new MongoDBStore({
+  uri: MONGODB_URI,
+  collection: 'sessions'
+})
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -23,7 +30,8 @@ app.use(session({
   secret: SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60 * 60 * 3000 }
+  cookie: { maxAge: 60 * 60 * 3000 },
+  store: store
 }));
 
 

@@ -38,15 +38,23 @@ exports.postLogin = async (req, res, next) => {
     }
 
     const compare = await bcrypt.compare(password, user.password);
-    console.log(compare)
+   
     if (!compare) {
       return res.redirect("/login");      
     }
+
+    req.session.isLoggedIn = true
+    req.session.user = user
+    await req.session.save()
 
     res.redirect("/");
   } catch (err) {
     console.log(err);
   }
+};
+
+exports.postLogout = (req, res, next) => {
+ 
 };
 
 exports.getResetPassword = (req, res, next) => {
