@@ -6,7 +6,6 @@
         <nav>
           <ul>
             <li><a class="<%= path === '/home' ? 'active' : '' %>" href="/">Home</a></li>
-            <li><a href="#">Articles</a></li>
           </ul>
           
           <% if (!isLoggedIn) { %> 
@@ -15,8 +14,13 @@
             <li><a class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>" href="/signup">Sign Up</a></li>
           </ul>
         <% } else { %>
-          <ul class="sign-in__login">
-            <form action="/logout" method="post">
+          <ul class="sign-in__login"> 
+            <li>              
+              <a class="<%= path === '/create-article' ? 'sign-up active' : 'sign-up'  %>" href="/create-article">
+                <i class='fas fa-pencil-alt'></i>
+                Write Article
+              </a>              
+            </li>
               <button class= 'logout' type="submit">Logout</button>
             </form>
             
@@ -35,7 +39,6 @@
           <nav>
             <ul>
               <li><a class="<%= path === '/home' ? 'active' : '' %>" href="/">Home</a></li>
-              <li><a href="#">Articles</a></li>
             </ul>
             <% if (!isLoggedIn) { %> 
           <ul class="sign-in__login">
@@ -44,6 +47,12 @@
           </ul>
         <% } else { %>
           <ul class="sign-in__login">
+            <li>              
+              <a class="<%= path === '/create-article' ? 'sign-up active' : 'sign-up'  %>" href="/create-article">
+                <i class='fas fa-pencil-alt'></i>
+                Write Article
+              </a>              
+            </li>
             <form action="/logout" method="post">
               <button class= 'logout' type="submit">Logout</button>
             </form>

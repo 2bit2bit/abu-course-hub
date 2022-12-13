@@ -84,11 +84,11 @@ a.sign-up:hover {
 
 
 .logout {
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: #1c1c1c;
   padding: 1rem;
   border: none;
-  /* width: 8rem; */
+  font-weight: bold;
   font-size: large;
   align-items: center;
   justify-content: center;

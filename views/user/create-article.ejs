@@ -1,0 +1,25 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="css/article.css">
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <form class="form" action="/create-article" method="POST">
+            
+            <div>   
+                <input type="text" name="title" id="title" placeholder="Add Title">
+            </div>
+            <div>
+                <textarea name="article" id="article" placeholder="Tell your story..."></textarea>           
+            </div>
+
+            <div class="btns">
+            <button class="btn" type="submit">Save draft</button>
+            <button class="btn" type="submit">Publish</button>
+            </div>
+            
+        </form>
+    </main>
+
+<%- include('../includes/end.ejs') %></body>

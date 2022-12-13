@@ -9,6 +9,7 @@ const errorController = require("./controllers/error");
 const blogRoutes = require("./routes/blog");
 const authRoutes = require("./routes/auth");
 const isAuth = require('./middlewares/is-auth')
+const userRoute = require('./routes/user') 
 
 // const userModel = require('./models/user')
 
@@ -38,6 +39,7 @@ app.use(session({
 
 app.use(authRoutes);
 app.use(blogRoutes);
+app.use(isAuth, userRoute)
 app.use(errorController.get404);
 
 
