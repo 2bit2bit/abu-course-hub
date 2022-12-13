@@ -13,6 +13,6 @@ router.post("/login", authController.postLogin);
 
 router.post("/logout", authController.postLogout);
 
-router.get("/reset-password", authController.getResetPassword);
+// router.get("/reset-password", authController.getResetPassword);
 
 module.exports = router;

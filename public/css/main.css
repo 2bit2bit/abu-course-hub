@@ -50,7 +50,8 @@ header nav ul {
   display: flex;
 }
 
-header ul li a {
+
+header ul li a{
   color: #1c1c1c;
   font-weight: bold;
   text-decoration: none;
@@ -79,6 +80,25 @@ header ul .sign-up.active {
 a.sign-up:hover {
   color: #1c1c1c;
   background-color: #fff1da;
+}
+
+
+.logout {
+  background-color: black;
+  color: white;
+  padding: 1rem;
+  border: none;
+  /* width: 8rem; */
+  font-size: large;
+  align-items: center;
+  justify-content: center;
+  transition: transform 2s, background-color 0.3s;
+}
+
+.logout:hover,
+.logout:active {
+    color: #1c1c1c;
+    background-color:  #fff1da;;
 }
 
 @media only screen and (max-width: 600px) {
@@ -181,6 +201,11 @@ a.sign-up:hover {
   .mobile-nav a.sign-up:hover {
     color: #1c1c1c;
     background-color: #fff1da;
+  }
+
+  .sign-in__login form,
+  .logout {
+    width: 100%;
   }
 }
 

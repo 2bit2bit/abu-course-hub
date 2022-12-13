@@ -2,16 +2,27 @@
     <div class="mobile-nav">
       <button class="mobile-nav_close">X</button>
   
-      <nav>
+      
         <nav>
           <ul>
             <li><a class="<%= path === '/home' ? 'active' : '' %>" href="/">Home</a></li>
             <li><a href="#">Articles</a></li>
           </ul>
+          
+          <% if (!isLoggedIn) { %> 
           <ul class="sign-in__login">
             <li><a class="<%= path === '/login' ? 'active' : ' ' %>" href="/login">Login</a></li>
             <li><a class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>" href="/signup">Sign Up</a></li>
           </ul>
+        <% } else { %>
+          <ul class="sign-in__login">
+            <form action="/logout" method="post">
+              <button class= 'logout' type="submit">Logout</button>
+            </form>
+            
+          </ul>
+          <% } %>
+
         </nav>
     </div>
   
@@ -26,10 +37,18 @@
               <li><a class="<%= path === '/home' ? 'active' : '' %>" href="/">Home</a></li>
               <li><a href="#">Articles</a></li>
             </ul>
-            <ul class="sign-in__login">
-              <li><a class="<%= path === '/login' ? 'active' : ' ' %>" href="/login">Login</a></li>
-              <li><a class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>" href="/signup">Sign Up</a></li>
-            </ul>
+            <% if (!isLoggedIn) { %> 
+          <ul class="sign-in__login">
+            <li><a class="<%= path === '/login' ? 'active' : ' ' %>" href="/login">Login</a></li>
+            <li><a class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>" href="/signup">Sign Up</a></li>
+          </ul>
+        <% } else { %>
+          <ul class="sign-in__login">
+            <form action="/logout" method="post">
+              <button class= 'logout' type="submit">Logout</button>
+            </form>
+          </ul>
+          <% } %>
           </nav>
   
           <div class="mobile-nav_toggle">

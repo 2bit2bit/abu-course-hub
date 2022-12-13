@@ -1,10 +1,19 @@
 const userModel = require("../models/user");
 const bcrypt = require("bcrypt");
 
+//add validation
+
 exports.getSignup = (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+
   res.render("auth/signup", {
     pageTitle: "Sign Up",
     path: "/signup",
+    isLoggedIn: false,
   });
 };
 
@@ -21,9 +30,16 @@ exports.postSignup = async (req, res, next) => {
 };
 
 exports.getLogin = (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+
   res.render("auth/login", {
     pageTitle: "Login",
     path: "/login",
+    isLoggedIn: false,
   });
 };
 
@@ -38,14 +54,14 @@ exports.postLogin = async (req, res, next) => {
     }
 
     const compare = await bcrypt.compare(password, user.password);
-   
+
     if (!compare) {
-      return res.redirect("/login");      
+      return res.redirect("/login");
     }
 
-    req.session.isLoggedIn = true
-    req.session.user = user
-    await req.session.save()
+    req.session.isLoggedIn = true;
+    req.session.user = user;
+    await req.session.save();
 
     res.redirect("/");
   } catch (err) {
@@ -54,12 +70,22 @@ exports.postLogin = async (req, res, next) => {
 };
 
 exports.postLogout = (req, res, next) => {
- 
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    }
+    res.redirect("/");
+  });
 };
 
 exports.getResetPassword = (req, res, next) => {
+  req.session.destroy((err) => {
+    console.log(err);
+  });
+
   res.render("auth/reset-password", {
     pageTitle: "reset password",
     path: " ",
+    isLoggedIn: false,
   });
 };
