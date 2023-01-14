@@ -3,8 +3,8 @@ const router = express.Router()
 
 const userController = require('../controllers/user')
 
-router.get('/create-article', userController.getCreateArticle)
-// router.post('/create-article', userController.postCreateArticle)
+// router.get('/create-article', userController.getCreateArticle)
+router.post('/create-article', userController.postCreateArticle)
 
 // router.get('/articles', userController.getArticles)
 
