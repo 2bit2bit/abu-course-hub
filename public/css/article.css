@@ -26,7 +26,8 @@
   }
 
   textarea {
-    height: 16rem;
+    min-height: 20rem;
+    height: auto;
     font-size: large;
   }
   

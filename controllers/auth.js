@@ -65,7 +65,7 @@ exports.postLogin = async (req, res, next) => {
 
     res.redirect("/");
   } catch (err) {
-    console.log(err);
+    console.log(err); 
   }
 };
 
