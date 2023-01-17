@@ -6,6 +6,7 @@
         <nav>
           <ul>
             <li><a class="<%= path === '/home' ? 'active' : '' %>" href="/">Home</a></li>
+            <li><a class="<%= path === '/articles' ? 'active' : '' %>" href="/articles">Articles</a></li>
           </ul>
           
           <% if (!isLoggedIn) { %> 
@@ -39,6 +40,7 @@
           <nav>
             <ul>
               <li><a class="<%= path === '/home' ? 'active' : '' %>" href="/">Home</a></li>
+              <li><a class="<%= path === '/articles' ? 'active' : '' %>" href="/articles">Articles</a></li>
             </ul>
             <% if (!isLoggedIn) { %> 
           <ul class="sign-in__login">

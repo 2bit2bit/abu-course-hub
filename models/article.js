@@ -6,9 +6,7 @@ const articleSchema = new Schema({
   title: {
     type: String,
     required: true,
-    unique: true
   },
-  description: String,
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -25,6 +23,7 @@ const articleSchema = new Schema({
     default: 0,
     required: true
   },
+  description: String,
   reading_time: String,
   tags: [String],
   body: {

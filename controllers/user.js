@@ -11,13 +11,12 @@ exports.getCreateArticle = (req, res, next) => {
 
 exports.postCreateArticle = async (req, res, next) => {
   const title = req.body.title;
-//   const description = req.body.description;
-//   const tags = req.body.tags.split(",").map((tag) => {
-//     return tag.trim();
-//   });
-  console.log(req.session)
+  const description = req.body.description;
+  const tags = req.body.tags.split(",").map((tag) => {
+    return tag.trim();
+  });
   const body = req.body.body;
-  const author = req.user;
+  const author = req.session.user;
   const reading_time = calcReadingTime.calcReadingTime(body);
 
 //   if (await Article.findOne({ title })) {
