@@ -12,10 +12,11 @@ exports.getCreateArticle = (req, res, next) => {
 exports.postCreateArticle = async (req, res, next) => {
   const title = req.body.title;
   const description = req.body.description;
-  const tags = req.body.tags.split(",").map((tag) => {
+  const tags = req.body.tags.replace(/^\s+|\s+$/gm,'').split(",").map((tag) => {
     return tag.trim();
   });
   const body = req.body.body;
+  const publish = req.body.publish;
   const author = req.session.user;
   const reading_time = calcReadingTime.calcReadingTime(body);
 
@@ -28,9 +29,13 @@ exports.postCreateArticle = async (req, res, next) => {
     body,
   });
 
+  if (publish) {
+    article.state = 'published'
+  }
+
   try {
     await article.save();
-    res.status(201).json(article);
+    res.redirect('my-articles')
   } catch (err) {
     res.status(500).json({ message: "an error occured" });
     console.log(err);

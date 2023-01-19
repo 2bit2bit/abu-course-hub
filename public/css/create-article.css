@@ -54,3 +54,10 @@
       background-color: #111111;
       border-radius: 2rem;
   }
+
+  .publish-chkbox {
+    font-size: larger;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
