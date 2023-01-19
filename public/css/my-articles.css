@@ -1,0 +1,41 @@
+.btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn, .edit-article, .delete-btn{
+    /* float: right; */
+    background-color: black;
+    color: white;
+    padding: 4px;
+    margin:4px 0;
+    border: none;
+    width: 8rem;
+    font-size: large;
+    align-items: center;
+    justify-content: center;
+    transition: transform 2s, background-color 0.3s, border-radius 0.3s;
+}
+
+a.edit-article {
+  text-decoration: none;
+  padding:4px 1rem
+}
+
+.delete-btn {
+  background-color: red;
+
+}
+
+  .btn:hover,
+  .btn:active,
+  .edit-article:hover,
+  .edit-article:active,
+  .delete-btn:hover,
+  .delete-btn:active {
+      background-color: #1c1c1c;
+      border-radius: 2rem;
+  }
+
+ 

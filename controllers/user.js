@@ -86,7 +86,7 @@ exports.postEditArticle = async (req, res, next) => {
     if (!article) {
       return res.send("article not found");
     }
-    
+
     const title = req.body.title;
     const description = req.body.description;
     const tags = req.body.tags.split(",").map((tag) => {
@@ -95,20 +95,57 @@ exports.postEditArticle = async (req, res, next) => {
     const body = req.body.body;
     const reading_time = calcReadingTime.calcReadingTime(body);
 
- 
-     
-      article.title = title
-      article.description = description
-      article.reading_time =reading_time
-      article.tags = tags
-      article.body = body
-     
+    article.title = title;
+    article.description = description;
+    article.reading_time = reading_time;
+    article.tags = tags;
+    article.body = body;
 
-    await article.save()
-  
-    res.redirect(`/my-articles`)
+    await article.save();
+
+    res.redirect(`/my-articles`);
   } catch (err) {
     res.status(500).json({ message: "an error occured" });
     console.log(err);
   }
 };
+
+exports.postUpdateState = async (req, res, next) => {
+  const articleId = req.params.articleId;
+
+  try {
+    const article = await Article.findOne({
+      _id: articleId,
+      author: req.session.user,
+    });
+
+    if (article.state == "draft") {
+      article.state = "published";
+      
+    } else {
+      article.state = "draft";
+    }
+
+    await article.save();
+    res.redirect('/my-articles');
+  } catch (err) {
+    res.status(500).json({ message: "an error occured" });
+    console.log(err);
+  }
+};
+
+
+exports.postDeletetArticle =  async (req, res, next) => {
+  const articleId = req.params.articleId;
+
+  try {
+    const response = await Article.deleteOne({
+      _id: articleId,
+      author: req.session.user,
+    });
+    res.redirect('/my-articles');
+  } catch (err) {
+    res.status(500).json({message: "an error occured"});
+    console.log(err);
+  }
+};		 

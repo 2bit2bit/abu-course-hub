@@ -84,7 +84,7 @@ exports.getArticle = async (req, res, next) => {
     const article = await Article.findOne({
       _id: articleId,
       state: "published",
-    }).populate("author", "first_name last_name email");
+    }).populate("author", "username")
 
     article.read_count++;
 

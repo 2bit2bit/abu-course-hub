@@ -1,5 +1,6 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="css/articles.css">
+<link rel="stylesheet" href="css/my-articles.css">
 </head>
 
 <body>
@@ -16,7 +17,29 @@
                     <span>Read count: <%= articles[i].read_count %>  </span>
                     <span>State: <%= articles[i].state %>  </span>
                 </p>
-                <a href="edit-article/<%= articles[i]._id%>">Edit Article >>></a>
+                
+                <div class = 'btns'>
+                <form action="/edit-article/<%=articles[i]._id%>/update_state" method="post">
+                    
+                        <button class="btn" type="submit">
+                            <% if (articles[i].state == "draft") { %>
+                                Publish
+                            <% } else { %>
+                                Unpublish
+                            <% } %>                            
+                        </button>
+                        <a class='edit-article' href="edit-article/<%=articles[i]._id%>">Edit</a>                    
+                </form>
+                <form action="/delete-article/<%=articles[i]._id%>" method="post">                    
+                    <button class="delete-btn" type="submit">
+                        Delete                          
+                    </button>                  
+                </form>
+            </div>
+
+
+                
+
             </article> 
         <% } %>
 
