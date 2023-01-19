@@ -1,0 +1,19 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="css/articles.css">
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <h1><%= article.title %></h1> 
+        <p class="details">
+            <span>Reading Time: <%= article.reading_time %></span>
+            <span>Read count: <%= article.read_count %>  </span>
+            <span>Author: <%= article.author.username %></span>
+        </p>   
+        <p><%= article.description %></p>
+        <p><%= article.body %></p>                  
+
+    </main>
+
+<%- include('../includes/end.ejs') %>

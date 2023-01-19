@@ -2,6 +2,9 @@ const express = require("express");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const dbConnect = require("./utils/database");
+const path = require('path');
+
+const cors = require('cors')
 
 require("dotenv").config();
 
@@ -25,8 +28,10 @@ const store = new MongoDBStore({
   collection: "sessions",
 });
 
+app.use(cors())
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.set('views', 'views');
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: false }));
 app.use(
   session({

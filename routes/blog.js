@@ -4,7 +4,7 @@ const blogController = require('../controllers/blog')
 
 const router = express.Router()
 
-router.get('/articles/:articleId', blogController.getArticle)
+router.get('/article/:articleId', blogController.getArticle)
 router.get('/articles',blogController.getArticles)
 router.get('/',blogController.getIndex)
 

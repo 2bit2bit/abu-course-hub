@@ -63,7 +63,6 @@ exports.getArticles = async (req, res, next) => {
     // .limit(per_page);
 
     // res.json(articles);
-    console.log(articles);
 
     res.render("blog/articles", {
       pageTitle: "Articles",
@@ -71,6 +70,7 @@ exports.getArticles = async (req, res, next) => {
       isLoggedIn: req.session.isLoggedIn,
       articles: articles,
     });
+
   } catch (err) {
     res.status(500).json({ message: "an error occured" });
     console.log(err);
@@ -80,7 +80,6 @@ exports.getArticles = async (req, res, next) => {
 
 exports.getArticle = async (req, res, next) => {
   const { articleId } = req.params;
-  console.log(articleId)
   try {
     const article = await Article.findOne({
       _id: articleId,
@@ -91,8 +90,15 @@ exports.getArticle = async (req, res, next) => {
 
     article.save();
 
-    res.json(article);
-    console.log(article)
+    // res.json(article);
+    // console.log(article)
+
+    res.render("blog/article", {
+      pageTitle: article.title,
+      path: " ",
+      isLoggedIn: req.session.isLoggedIn,
+      article: article,
+    });
   } catch (err) {
     res.status(500).json({message: "an error occured"});
     console.log(err);
