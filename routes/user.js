@@ -6,11 +6,12 @@ const userController = require('../controllers/user')
 router.get('/create-article', userController.getCreateArticle)
 router.post('/create-article', userController.postCreateArticle)
 
-// router.get('/articles', userController.getArticles)
+router.get('/my-articles', userController.getMyArticles)
 
 // router.put('/edit-article/:articleId/update_state', userController.postUpdateState)
 
-// router.put('/edit-article/:articleId', userController.postEditArticle)
+router.get('/edit-article/:articleId', userController.getEditArticle)
+router.post('/edit-article/:articleId', userController.postEditArticle)
 
 // router.delete('/delete-article/:articleId', userController.postDeletetArticle)
 

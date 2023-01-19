@@ -55,6 +55,11 @@
                 Write Article
               </a>              
             </li>
+            <li>              
+              <a class="<%= path === '/my-articles' ? ' active' : ' '  %>" href="/my-articles">
+                My Articles
+              </a>              
+            </li>
             <form action="/logout" method="post">
               <button class= 'logout' type="submit">Logout</button>
             </form>

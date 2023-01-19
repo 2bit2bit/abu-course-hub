@@ -57,7 +57,7 @@ exports.getArticles = async (req, res, next) => {
   // }
 
   try {
-    const articles = await Article.find().populate("author", "username");
+    const articles = await Article.find({state: "published"}).populate("author", "username");
     // .sort(sortQuery)
     // .skip(page)
     // .limit(per_page);
@@ -83,15 +83,12 @@ exports.getArticle = async (req, res, next) => {
   try {
     const article = await Article.findOne({
       _id: articleId,
-      // state: "published",
+      state: "published",
     }).populate("author", "first_name last_name email");
 
     article.read_count++;
 
     article.save();
-
-    // res.json(article);
-    // console.log(article)
 
     res.render("blog/article", {
       pageTitle: article.title,

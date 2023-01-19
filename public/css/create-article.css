@@ -46,10 +46,11 @@
     font-size: large;
     align-items: center;
     justify-content: center;
-    transition: transform 2s, background-color 0.3s;
+    transition: transform 2s, background-color 0.3s, border-radius 0.3s;
   }
   
   .form button:hover,
   .form button:active {
       background-color: #111111;
+      border-radius: 2rem;
   }
