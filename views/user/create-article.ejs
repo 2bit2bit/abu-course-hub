@@ -5,7 +5,8 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <form class="form" action="/create-article" method="POST">
+        <form class="form" action="/create-article" method="POST"  enctype="multipart/form-data">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">         
             
             <div>   
                 <input type="text" name="title" id="title" placeholder="Add Title" >
@@ -19,8 +20,10 @@
             <div>   
                 <input type="text" name="tags" id="tags" placeholder="Add tags, saperate with comma (,)">
             </div>
-
-            <!-- add check box for publihs immediately -->
+            <!-- <div>
+                <label for="cover-image"> Upload cover photo: </label>
+                <input type="file" id="cover-image" name="coverImage">
+            </div> -->
             <div class="publish-chkbox">
                 <label for="publish">Publish immediately: </label>
                 <input type="checkbox" name="publish" id="publish">

@@ -3,8 +3,7 @@ const Article = require("../models/article");
 exports.getIndex = (req, res, next) => {
   res.render("blog/index", {
     pageTitle: "Home",
-    path: "/home",
-    isLoggedIn: req.session.isLoggedIn,
+    path: "/home"
   });
 };
 

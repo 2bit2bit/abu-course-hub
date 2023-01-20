@@ -20,7 +20,7 @@
                 
                 <div class = 'btns'>
                 <form action="/edit-article/<%=articles[i]._id%>/update_state" method="post">
-                    
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">                    
                         <button class="btn" type="submit">
                             <% if (articles[i].state == "draft") { %>
                                 Publish
@@ -30,7 +30,8 @@
                         </button>
                         <a class='edit-article' href="edit-article/<%=articles[i]._id%>">Edit</a>                    
                 </form>
-                <form action="/delete-article/<%=articles[i]._id%>" method="post">                    
+                <form action="/delete-article/<%=articles[i]._id%>" method="post">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">                  
                     <button class="delete-btn" type="submit">
                         Delete                          
                     </button>                  

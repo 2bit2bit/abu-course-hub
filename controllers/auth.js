@@ -30,16 +30,10 @@ exports.postSignup = async (req, res, next) => {
 };
 
 exports.getLogin = (req, res, next) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.log(err);
-    }
-  });
-
+  
   res.render("auth/login", {
     pageTitle: "Login",
     path: "/login",
-    isLoggedIn: false,
   });
 };
 

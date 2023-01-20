@@ -1,0 +1,28 @@
+main {
+   width: 80%;
+   margin:auto;
+background-color: white;
+
+}
+
+.cover-photo {
+    width: 100%;
+    height: 16rem;
+    margin: auto;
+    object-fit: cover;
+}
+
+.details {
+    border-top: 1px solid #fff1da ;
+    color: rgb(54, 54, 54);
+    
+}
+
+.description {
+    background-color: #fff1da;
+    margin: 0;
+    padding: 1rem;
+}
+.body {
+    padding-top: 1rem;
+}
