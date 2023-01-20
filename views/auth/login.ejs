@@ -5,6 +5,10 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
+
+        <% if (errorMessage) { %>
+            <div class="errorMessage"><%= errorMessage %></div>
+        <% } %>
         <form class="auth-form" action="/login" method="POST">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>">            
             <div>

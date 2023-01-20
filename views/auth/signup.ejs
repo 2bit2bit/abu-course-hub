@@ -5,6 +5,9 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
+        <% errorMessage.forEach(error => { %>
+            <div class="errorMessage"><%= error %></div>
+       <% }) %> 
         <form class="auth-form" action="/signup" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             

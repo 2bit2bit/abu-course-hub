@@ -6,6 +6,7 @@ const path = require("path");
 require("dotenv").config();
 
 const csrf = require('csurf')
+const flash = require('connect-flash')
 
 // const multer  = require('multer')
 // const cloudinary = require("cloudinary").v2;
@@ -28,6 +29,7 @@ const userRoute = require("./routes/user");
 const app = express();
 
 const csrfProtection = csrf()
+
 
 dbConnect.connect();
 
@@ -54,6 +56,7 @@ app.use(
   })
 );
 app.use(csrfProtection)
+app.use(flash())
 
 app.use((req, res, next) => {
   res.locals.csrfToken = req.csrfToken()
