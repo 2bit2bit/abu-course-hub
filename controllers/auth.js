@@ -1,30 +1,41 @@
 const userModel = require("../models/user");
 const bcrypt = require("bcrypt");
+require('dotenv').config()
 
-//add validation
+const nodemailer = require("nodemailer");
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    type: 'OAuth2',
+    user: process.env.MAIL_USERNAME,
+    pass: process.env.MAIL_PASSWORD,
+    clientId: process.env.OAUTH_CLIENTID,
+    clientSecret: process.env.OAUTH_CLIENT_SECRET,
+    refreshToken: process.env.OAUTH_REFRESH_TOKEN
+  }
+});
 
 exports.getSignup = (req, res, next) => {
-  
-  let message = req.flash('error');
+  let message = req.flash("error");
 
   res.render("auth/signup", {
     pageTitle: "Sign Up",
     path: "/signup",
     isLoggedIn: false,
-    errorMessage: message
+    errorMessage: message,
   });
 };
-
 
 exports.postSignup = async (req, res, next) => {
   const { email, username, password, confirmPassword } = req.body;
 
-  const isEmail = await userModel.findOne({email})
+  const isEmail = await userModel.findOne({ email });
   if (isEmail) {
     req.flash("error", "Email exist, try forget password");
   }
 
-  const isUsername = await userModel.findOne({username})
+  const isUsername = await userModel.findOne({ username });
   if (isUsername) {
     req.flash("error", "username exist, try a different one");
   }
@@ -43,8 +54,7 @@ exports.postSignup = async (req, res, next) => {
 };
 
 exports.getLogin = (req, res, next) => {
-
-  let message = req.flash('error');
+  let message = req.flash("error");
   if (message.length > 0) {
     message = message[0];
   } else {
@@ -59,10 +69,8 @@ exports.getLogin = (req, res, next) => {
     pageTitle: "Login",
     path: "/login",
     csrfToken: req.csrfToken(),
-    errorMessage: message
+    errorMessage: message,
   });
-
-  
 };
 
 exports.postLogin = async (req, res, next) => {
@@ -103,12 +111,33 @@ exports.postLogout = (req, res, next) => {
 };
 
 exports.getResetPassword = (req, res, next) => {
-  req.session.destroy((err) => {
-    console.log(err);
-  });
-
   res.render("auth/reset-password", {
     pageTitle: "reset password",
+    path: " ",
+    isLoggedIn: false,
+  });
+};
+
+exports.postResetPassword = (req, res, next) => {
+  const email = req.body.email;
+
+  let mailOptions = {
+    from: process.env.MAIL_USERNAME,
+    to: email,
+    subject: 'Nodemailer Project',
+    text: 'Hi from your nodemailer project'
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+
+  res.render("auth/check-email", {
+    pageTitle: "Check your email",
     path: " ",
     isLoggedIn: false,
   });
