@@ -8,9 +8,7 @@
         <% errorMessage.forEach(error => { %>
             <div class="errorMessage"><%= error %></div>
        <% }) %> 
-        <form class="auth-form" action="/signup" method="POST">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            
+        <form class="auth-form" action="/signup" method="POST">            
             <div>
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" placeholder="email">

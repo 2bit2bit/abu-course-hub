@@ -5,9 +5,7 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <form class="form" action="/create-article" method="POST"  enctype="multipart/form-data">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">         
-            
+        <form class="form" action="/create-article" method="POST"  enctype="application/x-www-form-urlencoded">            
             <div>   
                 <input type="text" name="title" id="title" placeholder="Add Title" >
             </div>

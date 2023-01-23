@@ -1,7 +1,7 @@
 const Article = require("../models/article");
 const calcReadingTime = require("../utils/reading_time");
 
-const cloudinary = require('cloudinary').v2;
+// const cloudinary = require('cloudinary').v2;
 
 exports.getCreateArticle = (req, res, next) => {
   res.render("user/create-article", {
@@ -14,7 +14,7 @@ exports.getCreateArticle = (req, res, next) => {
 exports.postCreateArticle = async (req, res, next) => {
   const title = req.body.title;
   const description = req.body.description;
-  const tags = req.body.tags.replace(/^\s+|\s+$/gm,'').split(",").map((tag) => {
+  const tags = req.body.tags.split(",").map((tag) => {
     return tag.trim();
   });
   
@@ -24,7 +24,6 @@ exports.postCreateArticle = async (req, res, next) => {
   const coverImage = req.body.coverImage
   const author = req.session.user;
   const reading_time = calcReadingTime.calcReadingTime(body);
-  console.log(coverImage)
   const article = new Article({
     title,
     description,
@@ -39,7 +38,7 @@ exports.postCreateArticle = async (req, res, next) => {
   }
 
   try {
-    // await article.save();
+    await article.save();
     res.redirect('my-articles')
   } catch (err) {
     res.status(500).json({ message: "an error occured" });

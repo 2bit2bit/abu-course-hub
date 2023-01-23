@@ -10,7 +10,6 @@
             <div class="errorMessage"><%= errorMessage %></div>
         <% } %>
         <form class="auth-form" action="/login" method="POST">
-            <input type="hidden" name="_csrf" value="<%=csrfToken%>">            
             <div>
                 <label for="email_username">Email</label>
                 <input type="text" name="email" id="email" placeholder="email">

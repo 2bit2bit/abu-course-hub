@@ -5,9 +5,7 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <form class="form" action="/edit-article/<%= article._id%>" method="POST">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            
+        <form class="form" action="/edit-article/<%= article._id%>" method="POST">            
             <div>   
                 <input type="text" name="title" id="title" placeholder="Add Title" value="<%= article.title %>" >
             </div>
