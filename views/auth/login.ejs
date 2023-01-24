@@ -12,11 +12,11 @@
         <form class="auth-form" action="/login" method="POST">
             <div>
                 <label for="email_username">Email</label>
-                <input type="text" name="email" id="email" placeholder="email">
+                <input type="text" name="email" id="email" placeholder="email" value="<%= oldInput.email %>">
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="password">           
+                <input type="password" name="password" id="password" placeholder="password" value="<%= oldInput.password %>">           
             </div>
 
             <button class="btn" type="submit">Login</button>

@@ -26,22 +26,21 @@ exports.getSignup = (req, res, next) => {
       pageTitle: "Sign Up",
       path: "/signup",
       isLoggedIn: false,
-      errorMessage: '',
+      errorMessage: "",
       oldInput: {
-        email: '',
-        username: '',
-        password: '',
-        confirmPassword: ''
+        email: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
       },
     });
   });
-  
 };
 
 exports.postSignup = async (req, res, next) => {
   const { email, username, password } = req.body;
 
-  let errorMessage = ''
+  let errorMessage = "";
 
   const isEmail = await userModel.findOne({ email });
   if (isEmail) {
@@ -61,9 +60,9 @@ exports.postSignup = async (req, res, next) => {
       errorMessage: errorMessage,
       oldInput: {
         email: req.body.email,
-        username:  req.body.username,
-        password:  req.body.password,
-        confirmPassword:  req.body.confirmPassword,
+        username: req.body.username,
+        password: req.body.password,
+        confirmPassword: req.body.confirmPassword,
       },
     });
   }
@@ -78,22 +77,21 @@ exports.postSignup = async (req, res, next) => {
 };
 
 exports.getLogin = (req, res, next) => {
-  let message = req.flash("error");
-  if (message.length > 0) {
-    message = message[0];
-  } else {
-    message = null;
-  }
-
-  // req.session.destroy((err) => {
-  //   console.log(err);
-  // });
-
-  res.render("auth/login", {
-    pageTitle: "Login",
-    path: "/login",
-    errorMessage: message,
-  });
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    }
+    return res.render("auth/login", {
+      pageTitle: "Login",
+      path: "/login",
+      isLoggedIn: false,
+      errorMessage: '',
+      oldInput: {
+        email: '',
+        password: '',
+      },
+    });
+  });  
 };
 
 exports.postLogin = async (req, res, next) => {
@@ -103,15 +101,31 @@ exports.postLogin = async (req, res, next) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      req.flash("error", "invalid email");
-      return res.redirect("/login");
+      return res.status(422).render("auth/login", {
+        pageTitle: "Login",
+        path: "/login",
+        isLoggedIn: false,
+        errorMessage: "invalid email or password",
+        oldInput: {
+          email: req.body.email,
+          password: req.body.password,
+        },
+      });
     }
 
     const compare = await bcrypt.compare(password, user.password);
-   
+
     if (!compare) {
-      req.flash("error", "invalid  password");
-      return res.redirect("/login");
+      return res.status(422).render("auth/login", {
+        pageTitle: "Login",
+        path: "/login",
+        isLoggedIn: false,
+        errorMessage: "invalid email or password",
+        oldInput: {
+          email: req.body.email,
+          password: req.body.password,
+        },
+      });
     }
 
     req.session.isLoggedIn = true;
@@ -239,7 +253,7 @@ exports.postUpdatePassword = async (req, res, next) => {
     return res.send("error: user not found");
   }
 
-  user.password = password
+  user.password = password;
   await user.save();
 
   res.redirect("/login");

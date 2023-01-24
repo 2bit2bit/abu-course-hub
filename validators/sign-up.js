@@ -42,8 +42,7 @@ const signupValidator = Joi.object({
     .trim()
     .min(8)
     .max(30)
-    .required()
-    .messages({ "any.only": "{{#label}} does not match" }),
+    .required(),
 
   confirmPassword: Joi.any()
     .equal(Joi.ref("password"))

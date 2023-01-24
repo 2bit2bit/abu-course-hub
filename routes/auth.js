@@ -5,12 +5,13 @@ const authController = require("../controllers/auth");
 
 const router = express.Router();
 const validateSignup = require('../validators/sign-up')
+const validateLogin = require('../validators/login')
 
 router.get("/signup", authController.getSignup);
 router.post("/signup", validateSignup, authController.postSignup);
 
 router.get("/login", authController.getLogin);
-router.post("/login", authController.postLogin);
+router.post("/login", validateLogin, authController.postLogin);
 
 router.post("/logout", authController.postLogout);
 
