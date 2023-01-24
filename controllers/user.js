@@ -49,8 +49,10 @@ exports.postCreateArticle = async (req, res, next) => {
     await article.save();
     res.redirect("my-articles");
   } catch (err) {
-    res.status(500).json({ message: "an error occured" });
-    console.log(err);
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    console.log(error);
+    next(error);
   }
 };
 
@@ -67,8 +69,10 @@ exports.getMyArticles = async (req, res, next) => {
       articles: articles,
     });
   } catch (err) {
-    res.status(500).json({ message: "an error occured" });
-    console.log(err);
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    console.log(error);
+    next(error);
   }
 };
 
@@ -93,8 +97,10 @@ exports.getEditArticle = async (req, res, next) => {
       }
     });
   } catch (err) {
-    res.status(500).json({ message: "an error occured" });
-    console.log(err);
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    console.log(error);
+    next(error);
   }
 };
 
@@ -129,8 +135,10 @@ exports.postEditArticle = async (req, res, next) => {
 
     res.redirect(`/my-articles`);
   } catch (err) {
-    res.status(500).json({ message: "an error occured" });
-    console.log(err);
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    console.log(error);
+    next(error);
   }
 };
 
@@ -152,8 +160,10 @@ exports.postUpdateState = async (req, res, next) => {
     await article.save();
     res.redirect("/my-articles");
   } catch (err) {
-    res.status(500).json({ message: "an error occured" });
-    console.log(err);
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    console.log(error);
+    next(error);
   }
 };
 
@@ -167,7 +177,9 @@ exports.postDeletetArticle = async (req, res, next) => {
     });
     res.redirect("/my-articles");
   } catch (err) {
-    res.status(500).json({ message: "an error occured" });
-    console.log(err);
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    console.log(error);
+    next(error);
   }
 };

@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Article = require("../models/article");
 
 exports.getIndex = (req, res, next) => {
@@ -71,19 +72,37 @@ exports.getArticles = async (req, res, next) => {
     });
 
   } catch (err) {
-    res.status(500).json({ message: "an error occured" });
-    console.log(err);
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    console.log(error);
+    next(error);
   }
 };
 
 
 exports.getArticle = async (req, res, next) => {
   const { articleId } = req.params;
+
+  if (!mongoose.isValidObjectId(articleId)) {
+    return res.status(404).render('404', {
+      pageTitle: 'Page Not Found',
+      path: '/404',
+      isLoggedIn: req.session.isLoggedIn
+    });
+  }
   try {
     const article = await Article.findOne({
       _id: articleId,
       state: "published",
     }).populate("author", "username")
+
+    if(!article) {
+     return res.status(404).render('404', {
+        pageTitle: 'Page Not Found',
+        path: '/404',
+        isLoggedIn: req.session.isLoggedIn
+      });
+    }
 
     article.read_count++;
 
@@ -96,7 +115,9 @@ exports.getArticle = async (req, res, next) => {
       article: article,
     });
   } catch (err) {
-    res.status(500).json({message: "an error occured"});
-    console.log(err);
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    console.log(error);
+    next(error);
   }
 };

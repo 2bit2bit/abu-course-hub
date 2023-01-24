@@ -38,60 +38,66 @@ exports.getSignup = (req, res, next) => {
 };
 
 exports.postSignup = async (req, res, next) => {
-  const { email, username, password } = req.body;
-
-  let errorMessage = "";
-
-  const isEmail = await userModel.findOne({ email });
-  if (isEmail) {
-    errorMessage = "Email exist, try a different one";
-  }
-
-  const isUsername = await userModel.findOne({ username });
-  if (isUsername) {
-    errorMessage = "username exist,  try a different one";
-  }
-
-  if (isUsername || isEmail) {
-    return res.status(422).render("auth/signup", {
-      pageTitle: "Sign Up",
-      path: "/signup",
-      isLoggedIn: false,
-      errorMessage: errorMessage,
-      oldInput: {
-        email: req.body.email,
-        username: req.body.username,
-        password: req.body.password,
-        confirmPassword: req.body.confirmPassword,
-      },
-    });
-  }
-  const user = new userModel({ email, username, password });
-
   try {
+    const { email, username, password } = req.body;
+
+    let errorMessage = "";
+
+    const isEmail = await userModel.findOne({ email });
+    if (isEmail) {
+      errorMessage = "Email exist, try a different one";
+    }
+
+    const isUsername = await userModel.findOne({ username });
+    if (isUsername) {
+      errorMessage = "username exist,  try a different one";
+    }
+
+    if (isUsername || isEmail) {
+      return res.status(422).render("auth/signup", {
+        pageTitle: "Sign Up",
+        path: "/signup",
+        isLoggedIn: false,
+        errorMessage: errorMessage,
+        oldInput: {
+          email: req.body.email,
+          username: req.body.username,
+          password: req.body.password,
+          confirmPassword: req.body.confirmPassword,
+        },
+      });
+    }
+    const user = new userModel({ email, username, password });
+
     await user.save();
     res.redirect("/login");
   } catch (err) {
-    console.log(err);
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    console.log(error);
+    next(error);
   }
 };
 
 exports.getLogin = (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      console.log(error);
+      next(error);
     }
     return res.render("auth/login", {
       pageTitle: "Login",
       path: "/login",
       isLoggedIn: false,
-      errorMessage: '',
+      errorMessage: "",
       oldInput: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
       },
     });
-  });  
+  });
 };
 
 exports.postLogin = async (req, res, next) => {
@@ -134,14 +140,20 @@ exports.postLogin = async (req, res, next) => {
 
     res.redirect("/");
   } catch (err) {
-    console.log(err);
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    console.log(error);
+    next(error);
   }
 };
 
 exports.postLogout = (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      console.log(error);
+      next(error);
     }
     res.redirect("/");
   });
@@ -160,6 +172,9 @@ exports.getResetPassword = (req, res, next) => {
     path: " ",
     isLoggedIn: false,
     errorMessage: message,
+    oldInput: {
+      email: "",
+    },
   });
 };
 
@@ -191,11 +206,12 @@ exports.postResetPassword = async (req, res, next) => {
       `,
     };
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
+    transporter.sendMail(mailOptions, function (err, info) {
+      if (err) {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
         console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
+        next(error);
       }
     });
 
@@ -204,8 +220,11 @@ exports.postResetPassword = async (req, res, next) => {
       path: " ",
       isLoggedIn: false,
     });
-  } catch (error) {
+  } catch (err) {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
     console.log(error);
+    next(error);
   }
 };
 
@@ -215,7 +234,7 @@ exports.getUpdatePassword = async (req, res, next) => {
     resetToken: token,
     resetTokenExpiration: { $gt: Date.now() },
   });
-  console.log(token, user);
+
   if (!user) {
     return res.send("invalid or expired token");
   }
@@ -238,23 +257,32 @@ exports.getUpdatePassword = async (req, res, next) => {
 };
 
 exports.postUpdatePassword = async (req, res, next) => {
-  const userId = req.body.userId;
-  const confirmPassword = req.body.confirmPassword;
-  const password = req.body.password;
-  const passwordToken = req.body.passwordToken;
+  try {
+    const userId = req.body.userId;
+    const confirmPassword = req.body.confirmPassword;
+    const password = req.body.password;
+    const passwordToken = req.body.passwordToken;
 
-  const user = await userModel.findOne({
-    _id: userId,
-    resetToken: passwordToken,
-    resetTokenExpiration: { $gt: Date.now() },
-  });
+    const user = await userModel.findOne({
+      _id: userId,
+      resetToken: passwordToken,
+      resetTokenExpiration: { $gt: Date.now() },
+    });
 
-  if (!user) {
-    return res.send("error: user not found");
+    if (!user) {
+      return res.send("error: user not found");
+    }
+
+    user.password = password;
+    user.resetToken = "";
+    user.resetTokenExpiration = "";
+    await user.save();
+
+    res.redirect("/login");
+  } catch (err) {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    console.log(error);
+    next(error);
   }
-
-  user.password = password;
-  await user.save();
-
-  res.redirect("/login");
 };

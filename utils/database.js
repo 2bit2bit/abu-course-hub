@@ -6,6 +6,9 @@ exports.connect = () => {
     .connect(process.env.MONGODB_URI)
     .then(console.log("MONGODB connected "))
     .catch((err) => {
-      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      console.log(error);
+      next(error);
     });
 };

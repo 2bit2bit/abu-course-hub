@@ -5,12 +5,11 @@ const dbConnect = require("./utils/database");
 const path = require("path");
 require("dotenv").config();
 
-const flash = require('connect-flash')
+const flash = require("connect-flash");
 
 const errorController = require("./controllers/error");
 const blogRoutes = require("./routes/blog");
 const authRoutes = require("./routes/auth");
-const isAuth = require("./middlewares/is-auth");
 const userRoute = require("./routes/user");
 
 const app = express();
@@ -38,17 +37,25 @@ app.use(
     store: store,
   })
 );
-app.use(flash())
+app.use(flash());
 
 app.use((req, res, next) => {
-  res.locals.isLoggedIn = req.session.isLoggedIn
-  next()
-})
+  res.locals.isLoggedIn = req.session.isLoggedIn;
+  next();
+});
 
 app.use(authRoutes);
 app.use(blogRoutes);
-app.use(isAuth, userRoute);
+app.use(userRoute);
 app.use(errorController.get404);
+
+app.use((error, req, res, next) => {
+  res.status(500).render("500", {
+    pageTitle: "Server Error",
+    path: "/500",
+    isLoggedIn: req.session.isLoggedIn,
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`http//localhost:${PORT}`);
