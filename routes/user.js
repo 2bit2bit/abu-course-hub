@@ -1,18 +1,33 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-const userController = require('../controllers/user')
+const validateCreateArticle = require("../validators/create-article");
+const validateEditArticle = require("../validators/edit-article");
 
-router.get('/create-article', userController.getCreateArticle)
-router.post('/create-article', userController.postCreateArticle)
+const userController = require("../controllers/user");
 
-router.get('/my-articles', userController.getMyArticles)
+router.get("/create-article", userController.getCreateArticle);
 
-router.post('/edit-article/:articleId/update_state', userController.postUpdateState)
+router.post(
+  "/create-article",
+  validateCreateArticle,
+  userController.postCreateArticle
+);
 
-router.get('/edit-article/:articleId', userController.getEditArticle)
-router.post('/edit-article/:articleId', userController.postEditArticle)
+router.get("/my-articles", userController.getMyArticles);
 
-router.post('/delete-article/:articleId', userController.postDeletetArticle)
+router.post(
+  "/edit-article/:articleId/update_state",
+  userController.postUpdateState
+);
 
-module.exports = router
+router.get("/edit-article/:articleId", userController.getEditArticle);
+router.post(
+  "/edit-article/:articleId",
+  validateEditArticle,
+  userController.postEditArticle
+);
+
+router.post("/delete-article/:articleId", userController.postDeletetArticle);
+
+module.exports = router;

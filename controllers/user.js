@@ -4,10 +4,18 @@ const calcReadingTime = require("../utils/reading_time");
 // const cloudinary = require('cloudinary').v2;
 
 exports.getCreateArticle = (req, res, next) => {
-  res.render("user/create-article", {
+  return res.render("user/create-article", {
     pageTitle: "Create Article",
     path: "/create-article",
     isLoggedIn: req.session.isLoggedIn,
+    errorMessage: "",
+    oldInput: {
+      title: "",
+      description: "",
+      body: "",
+      tags: "",
+      publish: "",
+    },
   });
 };
 
@@ -17,11 +25,11 @@ exports.postCreateArticle = async (req, res, next) => {
   const tags = req.body.tags.split(",").map((tag) => {
     return tag.trim();
   });
-  
+
   const body = req.body.body;
-  
+
   const publish = req.body.publish;
-  const coverImage = req.body.coverImage
+  // const coverImage = req.body.coverImage
   const author = req.session.user;
   const reading_time = calcReadingTime.calcReadingTime(body);
   const article = new Article({
@@ -34,12 +42,12 @@ exports.postCreateArticle = async (req, res, next) => {
   });
 
   if (publish) {
-    article.state = 'published'
+    article.state = "published";
   }
 
   try {
     await article.save();
-    res.redirect('my-articles')
+    res.redirect("my-articles");
   } catch (err) {
     res.status(500).json({ message: "an error occured" });
     console.log(err);
@@ -76,6 +84,13 @@ exports.getEditArticle = async (req, res, next) => {
       path: " ",
       isLoggedIn: req.session.isLoggedIn,
       article: article,
+      errorMessage: '',
+      oldInput: {
+        title: article.title,
+        description: article.description,
+        body: article.body,
+        tags: article.tags,
+      }
     });
   } catch (err) {
     res.status(500).json({ message: "an error occured" });
@@ -130,21 +145,19 @@ exports.postUpdateState = async (req, res, next) => {
 
     if (article.state == "draft") {
       article.state = "published";
-      
     } else {
       article.state = "draft";
     }
 
     await article.save();
-    res.redirect('/my-articles');
+    res.redirect("/my-articles");
   } catch (err) {
     res.status(500).json({ message: "an error occured" });
     console.log(err);
   }
 };
 
-
-exports.postDeletetArticle =  async (req, res, next) => {
+exports.postDeletetArticle = async (req, res, next) => {
   const articleId = req.params.articleId;
 
   try {
@@ -152,9 +165,9 @@ exports.postDeletetArticle =  async (req, res, next) => {
       _id: articleId,
       author: req.session.user,
     });
-    res.redirect('/my-articles');
+    res.redirect("/my-articles");
   } catch (err) {
-    res.status(500).json({message: "an error occured"});
+    res.status(500).json({ message: "an error occured" });
     console.log(err);
   }
-};		 
+};

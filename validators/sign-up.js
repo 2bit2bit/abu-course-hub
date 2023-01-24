@@ -5,7 +5,7 @@ const validateSignup = async (req, res, next) => {
     await signupValidator.validateAsync(req.body);
     next();
   } catch (err) {
-    return res.render("auth/signup", {
+    return res.status(422).render("auth/signup", {
       pageTitle: "Sign Up",
       path: "/signup",
       isLoggedIn: false,

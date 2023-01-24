@@ -5,25 +5,27 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
+        <% if (errorMessage) { %>
+            <div class="errorMessage"><%= errorMessage %></div>
+        <% } %>
         <form class="form" action="/edit-article/<%= article._id%>" method="POST">            
-            <div>   
-                <input type="text" name="title" id="title" placeholder="Add Title" value="<%= article.title %>" >
-            </div>
-            <div>   
-                <input type="text" name="description" id="description" placeholder="Add a short description" value="<%= article.description %>">
-            </div>
-            <div>
-                <textarea name="body" id="article" placeholder="Tell your story..."> <%= article.body %></textarea>           
-            </div>
-            <div>   
-                <input type="text" name="tags" id="tags" placeholder="Add tags, saperate with comma (,)" value="<%= article.tags %>">
-            </div>
-            <!-- <div>
-                <label for="cover-image"> Upload cover photo: </label>
-                <input type="file" id="cover-image" name="cover-image">
-               
-            </div> -->
-
+            <form class="form" action="/create-article" method="POST"  enctype="application/x-www-form-urlencoded">            
+                <div>   
+                    <input type="text" name="title" id="title" placeholder="Add Title" value="<%= oldInput.title %>">
+                </div>
+                <div>   
+                    <input type="text" name="description" id="description" placeholder="Add a short description" value="<%= oldInput.description %>">
+                </div>
+                <div>
+                    <textarea name="body" id="article" placeholder="Tell your story..." ><%= oldInput.body %></textarea>           
+                </div>
+                <div>   
+                    <input type="text" name="tags" id="tags" placeholder="Add tags, saperate with comma (,)" value="<%= oldInput.tags %>">
+                </div>
+                <!-- <div>
+                    <label for="cover-image"> Upload cover photo: </label>
+                    <input type="file" id="cover-image" name="coverImage">
+                </div> -->
             <div class="btns">
             <button class="btn" type="submit">Update</button>
             </div>
