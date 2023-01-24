@@ -18,31 +18,54 @@ var transporter = nodemailer.createTransport({
 });
 
 exports.getSignup = (req, res, next) => {
-  let message = req.flash("error");
-
-  res.render("auth/signup", {
-    pageTitle: "Sign Up",
-    path: "/signup",
-    isLoggedIn: false,
-    errorMessage: message,
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    }
+    return res.render("auth/signup", {
+      pageTitle: "Sign Up",
+      path: "/signup",
+      isLoggedIn: false,
+      errorMessage: '',
+      oldInput: {
+        email: '',
+        username: '',
+        password: '',
+        confirmPassword: ''
+      },
+    });
   });
+  
 };
 
 exports.postSignup = async (req, res, next) => {
-  const { email, username, password, confirmPassword } = req.body;
+  const { email, username, password } = req.body;
+
+  let errorMessage = ''
 
   const isEmail = await userModel.findOne({ email });
   if (isEmail) {
-    req.flash("error", "Email exist, try forget password");
+    errorMessage = "Email exist, try a different one";
   }
 
   const isUsername = await userModel.findOne({ username });
   if (isUsername) {
-    req.flash("error", "username exist, try a different one");
+    errorMessage = "username exist,  try a different one";
   }
 
   if (isUsername || isEmail) {
-    return res.redirect("/signup");
+    return res.status(422).render("auth/signup", {
+      pageTitle: "Sign Up",
+      path: "/signup",
+      isLoggedIn: false,
+      errorMessage: errorMessage,
+      oldInput: {
+        email: req.body.email,
+        username:  req.body.username,
+        password:  req.body.password,
+        confirmPassword:  req.body.confirmPassword,
+      },
+    });
   }
   const user = new userModel({ email, username, password });
 
@@ -69,7 +92,6 @@ exports.getLogin = (req, res, next) => {
   res.render("auth/login", {
     pageTitle: "Login",
     path: "/login",
-    csrfToken: req.csrfToken(),
     errorMessage: message,
   });
 };

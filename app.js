@@ -7,23 +7,11 @@ require("dotenv").config();
 
 const flash = require('connect-flash')
 
-// const multer  = require('multer')
-// const cloudinary = require("cloudinary").v2;
-
-// // Configuration
-// cloudinary.config({
-//   cloud_name: "dlbdbsepv",
-//   api_key: "834411355526916",
-//   api_secret: "okATFN0V7RzIiD8sla2ToFu0PtE",
-// });
-
 const errorController = require("./controllers/error");
 const blogRoutes = require("./routes/blog");
 const authRoutes = require("./routes/auth");
 const isAuth = require("./middlewares/is-auth");
 const userRoute = require("./routes/user");
-
-// const userModel = require('./models/user')
 
 const app = express();
 
@@ -41,7 +29,6 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
-// app.use(multer().single('coverImage'))
 app.use(
   session({
     secret: SESSION_SECRET,
@@ -51,7 +38,6 @@ app.use(
     store: store,
   })
 );
-
 app.use(flash())
 
 app.use((req, res, next) => {

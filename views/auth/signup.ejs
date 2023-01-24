@@ -5,25 +5,25 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <% errorMessage.forEach(error => { %>
-            <div class="errorMessage"><%= error %></div>
-       <% }) %> 
-        <form class="auth-form" action="/signup" method="POST">            
+        <% if (errorMessage && errorMessage !== []) { %>
+            <div class="errorMessage"><%= errorMessage %></div>
+       <% } %> 
+        <form class="auth-form" action="/signup" method="POST" novalidate>            
             <div>
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="email">
+                <input type="email" name="email" id="email" placeholder="email" value="<%= oldInput.email %>">
             </div>
             <div>
                 <label for="username">Username</label>
-                <input type="text" name="username" id="username" placeholder="username">           
+                <input type="text" name="username" id="username" placeholder="username" minlength="4" maxlength="20" value="<%= oldInput.username %>">           
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="password">           
+                <input type="password" name="password" id="password" placeholder="password"  minlength="8" maxlength="50" value="<%= oldInput.password %>">           
             </div>
             <div>
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm password">
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="confirm password" minlength="8" maxlength="50"  value="<%= oldInput.confirmPassword %>" >
             </div>
 
             <button class="btn" type="submit">Signup</button>
