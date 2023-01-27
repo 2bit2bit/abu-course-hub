@@ -8,9 +8,9 @@
         <img class = 'cover-photo' src="/img/default-cover.webp" alt="Cover Photo">
         <h1><%= article.title %></h1> 
         <p class="details">
-            <span>Reading Time: <%= article.reading_time %></span>
-            <span>Read count: <%= article.read_count %>  </span>
-            <span>Author: <%= article.author.username %></span>
+            <span><i class='fas fa-clock'></i> <%= article.reading_time %></span>
+            <span><i class='fas fa-book-reader'></i>  <%= article.read_count %>  </span>
+            <span><i class='fas fa-user-alt'></i>  <%= article.author.username %></span>
         </p>   
         <p class="description"><%= article.description %></p>
         <p class="body"><%= article.body %></p>                  

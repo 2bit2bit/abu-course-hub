@@ -19,15 +19,26 @@ dbConnect.connect();
 const PORT = process.env.PORT;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
-const store = new MongoDBStore({
-  uri: process.env.MONGODB_URI,
-  collection: "sessions",
-});
-
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
+
+const store = new MongoDBStore(
+  {
+    uri: process.env.MONGODB_URI,
+    collection: "sessions",
+  },
+  (err) => {
+    app.use((req, res, next) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      console.log(error);
+      next(error);
+    });
+  }
+);
+
 app.use(
   session({
     secret: SESSION_SECRET,

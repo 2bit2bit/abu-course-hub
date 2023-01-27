@@ -5,8 +5,7 @@
       
         <nav>
           <ul>
-            <li><a class="<%= path === '/home' ? 'active' : '' %>" href="/">Home</a></li>
-            <li><a class="<%= path === '/articles' ? 'active' : '' %>" href="/articles">Articles</a></li>
+            <li><a class="<%= path === '/articles' ? 'active' : '' %>" href="/articles">All Articles</a></li>
           </ul>
           
           <% if (!isLoggedIn) { %> 
@@ -22,8 +21,14 @@
                 Write Article
               </a>              
             </li>
-              <button class= 'logout' type="submit">Logout</button>
-            </form>
+            <li>              
+              <a class="<%= path === '/my-articles' ? ' active' : ' '  %>" href="/my-articles">
+                My Articles
+              </a>
+              </li>
+              <form action="/logout" method="post">
+                <button class= 'logout' type="submit">Logout</button>
+              </form>
             
           </ul>
           <% } %>
@@ -39,8 +44,7 @@
     
           <nav>
             <ul>
-              <li><a class="<%= path === '/home' ? 'active' : '' %>" href="/">Home</a></li>
-              <li><a class="<%= path === '/articles' ? 'active' : '' %>" href="/articles">Articles</a></li>
+              <li><a class="<%= path === '/articles' ? 'active' : '' %>" href="/articles">All Articles</a></li>
             </ul>
             <% if (!isLoggedIn) { %> 
           <ul class="sign-in__login">

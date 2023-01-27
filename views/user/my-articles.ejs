@@ -1,6 +1,6 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="css/articles.css">
-<link rel="stylesheet" href="css/my-articles.css">
+<link rel="stylesheet" href="/css/articles.css">
+<link rel="stylesheet" href="/css/my-articles.css">
 </head>
 
 <body>
@@ -10,16 +10,21 @@
 
         <% for(var i = 0; i < articles.length; i++) { %>
             <article>
-                <h3><%= articles[i].title %></h3>
-                <p><%= articles[i].description %></p>
-                <p class="details">
-                    <span>Reading Time: <%= articles[i].reading_time %></span>
-                    <span>Read count: <%= articles[i].read_count %>  </span>
-                    <span>State: <%= articles[i].state %>  </span>
-                </p>
-                
+                <img src="/img/default-cover.webp" alt="cover-photo">
+                <div  class = 'detail'>
+                  <div>  
+                    <h3><%= articles[i].title %></h3>
+                    <p><%= articles[i].description %></p>
+                  </div>
+                  <div class="details">                  
+                    <span><i class='fas fa-clock'></i>  <%= articles[i].reading_time %></span>
+                    <span><i class='fas fa-book-reader'></i> <%= articles[i].read_count %>  </span>
+                  </div>
+                </div>  
+
                 <div class = 'btns'>
-                <form action="/edit-article/<%=articles[i]._id%>/update_state" method="post">
+                  <a class='edit-article' href="edit-article/<%=articles[i]._id%>">Edit</a> 
+                  <form action="/edit-article/<%=articles[i]._id%>/update_state" method="post">
                         <button class="btn" type="submit">
                             <% if (articles[i].state == "draft") { %>
                                 Publish
@@ -27,14 +32,14 @@
                                 Unpublish
                             <% } %>                            
                         </button>
-                        <a class='edit-article' href="edit-article/<%=articles[i]._id%>">Edit</a>                    
-                </form>
-                <form action="/delete-article/<%=articles[i]._id%>" method="post">
+                                           
+                  </form>
+                  <form action="/delete-article/<%=articles[i]._id%>" method="post">
                     <button class="delete-btn" type="submit">
                         Delete                          
                     </button>                  
-                </form>
-            </div>
+                  </form>            
+                </div>
 
 
                 

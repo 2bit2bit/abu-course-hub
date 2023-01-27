@@ -1,23 +1,26 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="css/articles.css">
+<link rel="stylesheet" href="/css/articles.css">
 </head>
 
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <h1>Articles</h1>
-
+       
         <% for(var i = 0; i < articles.length; i++) { %>
-            <article>
-                <h3><%= articles[i].title %></h3>
-                <p><%= articles[i].description %></p>
-                <p class="details">
-                    <span>Reading Time: <%= articles[i].reading_time %></span>
-                    <span>Read count: <%= articles[i].read_count %>  </span>
-                    <span>Author: <%= articles[i].author.username %></span>
-                </p>
-                <a href="article/<%= articles[i]._id%>">Continue Reading >>></a>
-            </article> 
+          <a class='article' href="article/<%= articles[i]._id%>">
+                <img src="/img/default-cover.webp" alt="cover-photo">
+                <div>
+                   <div>
+                     <h2><%= articles[i].title %></h2>                   
+                     <p><%= articles[i].description %></p>
+                   </div>                 
+                   <div class="details">                  
+                     <span><i class='fas fa-clock'></i>  <%= articles[i].reading_time %></span>
+                     <span><i class='fas fa-book-reader'></i> <%= articles[i].read_count %>  </span>
+                     <span><i class='fas fa-user-alt'></i> <%= articles[i].author.username %></span>
+                   </div>
+                </div>                
+           </a>
         <% } %>
 
     </main>

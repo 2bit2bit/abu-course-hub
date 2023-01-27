@@ -6,7 +6,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #fff1da;
+  background-color: #eeeeee;
   position: relative;
 
 }
@@ -60,12 +60,13 @@ header ul li a {
   padding: 1rem;
   transition: transform 2s, background-color 0.3s;
   display: block;
+  border: 1px solid transparent;
 }
 
 header ul li a:hover,
 header ul li a:active,
 header ul li a.active {
-  background-color: #fff1da;
+  border-bottom: 1px solid black;
 }
 
 header ul .sign-up {
@@ -75,12 +76,12 @@ header ul .sign-up {
 
 header ul .sign-up.active {
   color: #1c1c1c;
-  background-color: #fff1da;
+  background-color: white
 }
 
 a.sign-up:hover {
   color: #1c1c1c;
-  background-color: #fff1da;
+  background-color: white;
 }
 
 .logout {
@@ -98,7 +99,7 @@ a.sign-up:hover {
 .logout:hover,
 .logout:active {
   color: #1c1c1c;
-  background-color: #fff1da;
+  background-color: #eeeeee;
 }
 
 @media only screen and (max-width: 600px) {
@@ -154,7 +155,7 @@ a.sign-up:hover {
   .mobile-nav_close:hover,
   .mobile-nav_close:active {
     color: white;
-    background-color: #1c1c1c;
+    background-color: #eeeeee;
   }
 
   .mobile-nav ul {
@@ -185,7 +186,7 @@ a.sign-up:hover {
   .mobile-nav ul li a:hover,
   .mobile-nav ul li a:active,
   .mobile-nav ul li a.active {
-    background-color: #fff1da;
+    background-color: #eeeeee;
   }
 
   .mobile-nav .sign-up {
@@ -195,12 +196,12 @@ a.sign-up:hover {
 
   .mobile-nav .sign-up.active {
     color: #1c1c1c;
-    background-color: #fff1da;
+    background-color: #eeeeee;
   }
 
   .mobile-nav a.sign-up:hover {
     color: #1c1c1c;
-    background-color: #fff1da;
+    background-color: #eeeeee;
   }
 
   .sign-in__login form,

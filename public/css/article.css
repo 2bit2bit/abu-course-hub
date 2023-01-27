@@ -1,5 +1,5 @@
 main {
-   width: 80%;
+    max-width: 55rem;
    margin:auto;
 background-color: white;
 
@@ -13,13 +13,20 @@ background-color: white;
 }
 
 .details {
-    border-top: 1px solid #fff1da ;
-    color: rgb(54, 54, 54);
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 1rem 0;
+    color: rgb(116, 116, 116);
     
 }
 
+.details span {
+    padding: 0 8px;
+    display: inline-block;
+}
+
 .description {
-    background-color: #fff1da;
+    background-color: #eeeeee;
     margin: 0;
     padding: 1rem;
 }

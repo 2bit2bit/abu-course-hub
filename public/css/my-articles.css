@@ -1,7 +1,33 @@
+article {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  gap: 8px;
+  padding: 4px 8px; 
+  max-width: 65rem;
+  height: 10rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.247);
+  background-color: rgb(255, 255, 255);
+  margin:  4px auto; 
+  text-decoration: none;
+  color: black;
+  overflow: hidden; 
+}
+
+article img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
 .btns {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.btns form {
+  display: flex;
+  gap: 4px  ;
 }
 
 .btn, .edit-article, .delete-btn{
@@ -9,7 +35,7 @@
     background-color: black;
     color: white;
     padding: 4px;
-    margin:4px 0;
+    margin:4px 4px;
     border: none;
     width: 8rem;
     font-size: large;
@@ -38,4 +64,134 @@ a.edit-article {
       border-radius: 2rem;
   }
 
+
+article .detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}  
+
+.detail h3 {
+  width: 97%;
+    margin:8px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap;  
+}
+
+.detail p {
+  margin: 0 0;
+  height: 4rem;
+}
  
+article .details {
+    flex-direction: row;
+    margin: 1rem 0;
+    color: rgb(116, 116, 116);
+}
+ 
+.details span {
+  padding-right: 1rem;
+}
+
+@media only screen and (max-width: 600px) { 
+  article {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 30% 13%;
+    gap: 8px;
+    padding: 4px 8px; 
+    max-width: 65rem;
+    height: 25rem;
+    margin:  2rem auto; 
+    text-decoration: none;
+    color: black;
+    overflow: hidden; 
+  }
+  
+  article img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+   
+  }
+
+
+  
+  .btns form {
+    display: flex;
+    gap: 4px  ;
+  }
+  
+  .btn, .edit-article, .delete-btn{
+      /* float: right; */
+      background-color: black;
+      color: white;
+      padding: 4px;
+      margin:4px 4px;
+      border: none;
+      width: 8rem;
+      font-size: large;
+      align-items: center;
+      justify-content: center;
+      transition: transform 2s, background-color 0.3s, border-radius 0.3s;
+  }
+  
+  a.edit-article {
+    text-decoration: none;
+    padding:4px 1rem
+  }
+  
+  .delete-btn {
+    background-color: red;
+  
+  }
+  
+    .btn:hover,
+    .btn:active,
+    .edit-article:hover,
+    .edit-article:active,
+    .delete-btn:hover,
+    .delete-btn:active {
+        background-color: #1c1c1c;
+        border-radius: 2rem;
+    }
+  
+  
+  article .detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }  
+  
+  .detail h3 {
+    width: 97%;
+      margin:8px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      white-space: nowrap;  
+  }
+  
+  .detail p {
+    margin: 0 0;
+    height: auto
+  }
+   
+  article .details {
+      flex-direction: row;
+      margin: 1rem 0;
+      color: rgb(116, 116, 116);
+  }
+   
+  .details span {
+    padding-right: 1rem;
+  } 
+}

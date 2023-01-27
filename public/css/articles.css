@@ -1,24 +1,98 @@
-article {
-    width: 60%;
+a.article {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    padding: 4px; 
+    max-width: 65rem;
+    height: 10rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.247);
-    background-color: rgba(255, 255, 255, 0.658);
-    margin:  4px auto;
-    padding: 8px;
+    background-color: rgb(255, 255, 255);
+    margin:  16px auto; 
+    text-decoration: none;
+    color: black;
+    overflow: hidden;
 }
 
+a.article:hover {
+    box-shadow: 0px 1px 5px 6px rgba(0, 0, 0, 0.034);
+    background-color: #eeeeee;
+}
 
-article h3 {
+a.article img {
+    width: 30%;
+    object-fit: cover;
+}
+
+a.article > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+a.article div div:first-child {
+    width: 99%;
+    max-height: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;   
+}
+a.article h2 {
+    width: 97%;
+    margin:8px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap;  
+}
+
+a.article p {
     margin: 0 0;
+    height: 4rem;
 }
 
-article p {
-    margin:  8px 0;
+
+a.article .details {
+    flex-direction: row;
+    margin: 1rem 0;
+    color: rgb(116, 116, 116);
 }
 
-article .details {
-    color: rgb(63, 63, 63);
-}
-
-article .details span {
+a.article .details span {
     padding-right: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+    a.article {
+        flex-direction: column;
+        height: 16rem;
+        gap: 2px;
+    }
+
+     a.article img {
+        width: 100%;
+        height: 50%;
+        object-fit: cover;
+    }
+    
+    a.article > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        height: 50%;
+    }
+    
+    a.article div div:first-child {
+        width: 100%;
+        max-height:auto;
+        overflow:hidden
+   }
+      a.article h2 {
+        width: 100%;
+        margin:8px 0;
+        white-space: wrap;
+        overflow: auto;
+        text-overflow: ellipsis; 
+    }
+   
 }
