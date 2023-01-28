@@ -96,3 +96,31 @@ a.article .details span {
     }
    
 }
+
+.search {
+    margin: auto;
+    width: 100%;
+    max-width: 30rem;
+    display: flex;
+    align-items: center;
+}
+
+.search input {
+    padding: 8px;
+    width: 70%;
+    border-radius: 8px 0px 0px 8px ;
+    outline: none;
+    border: 1px solid #7a7a7a
+}
+
+.search input:hover,
+.search input:focus {
+    outline: none;
+}
+
+.search button {
+    width: 28%;
+    padding: 8px;
+    border-radius: 0px 8px 8px 0px ;
+    border: 1px solid #7a7a7a
+}

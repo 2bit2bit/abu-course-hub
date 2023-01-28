@@ -5,6 +5,10 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
+      <form class = "search" action="" method="get">
+        <input type="text" name="title" id="search" placeholder="Search" value="<%= prevSearch %>">
+        <button type="submit">Search</button>
+      </form>
        
         <% for(var i = 0; i < articles.length; i++) { %>
           <a class='article' href="article/<%= articles[i]._id%>">

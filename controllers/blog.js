@@ -27,6 +27,8 @@ exports.getArticles = async (req, res, next) => {
   // if (author) {
   //   findQuery.author = author;
   // }
+  const title = req.query.title
+  const regex = new RegExp(title, 'i') 
 
   // if (title) {
   //   findQuery.title = title;
@@ -57,7 +59,7 @@ exports.getArticles = async (req, res, next) => {
   // }
 
   try {
-    const articles = await Article.find({state: "published"}).populate("author", "username");
+    const articles = await Article.find({state: "published", title: {$regex: regex}}).populate("author", "username");
     // .sort(sortQuery)
     // .skip(page)
     // .limit(per_page);
@@ -69,6 +71,7 @@ exports.getArticles = async (req, res, next) => {
       path: "/articles",
       isLoggedIn: req.session.isLoggedIn,
       articles: articles,
+      prevSearch: title
     });
 
   } catch (err) {
