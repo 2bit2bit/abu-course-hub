@@ -35,6 +35,7 @@ const articleSchema = new Schema({
     default: Date.now,
     required: true,
   },
+  image: String
 });
 
 module.exports = mongoose.model("Article", articleSchema);

@@ -6,6 +6,8 @@ const path = require("path");
 require("dotenv").config();
 
 const flash = require("connect-flash");
+const multer = require('multer')
+
 
 const errorController = require("./controllers/error");
 const blogRoutes = require("./routes/blog");
@@ -19,10 +21,14 @@ dbConnect.connect();
 const PORT = process.env.PORT;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
+
+const storage = multer.memoryStorage();
+
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
+app.use(multer({ storage }).single('coverImage'))
 
 const store = new MongoDBStore(
   {

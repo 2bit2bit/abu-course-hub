@@ -30,6 +30,14 @@ exports.getArticles = async (req, res, next) => {
   const title = req.query.title
   const regex = new RegExp(title, 'i') 
 
+ let page = parseInt(req.query.page) 
+
+  if(!page) {
+    page = 1
+  }
+  const ITEMS_PER_PAGE = 2
+
+
   // if (title) {
   //   findQuery.title = title;
   // }
@@ -59,19 +67,22 @@ exports.getArticles = async (req, res, next) => {
   // }
 
   try {
-    const articles = await Article.find({state: "published", title: {$regex: regex}}).populate("author", "username");
-    // .sort(sortQuery)
-    // .skip(page)
-    // .limit(per_page);
+    const totalItems = await Article.find({state: "published", title: {$regex: regex}}).count()
+    const articles = await Article.find({state: "published", title: {$regex: regex}}).populate("author", "username")
+    .skip((page - 1) * ITEMS_PER_PAGE)
+    .limit(ITEMS_PER_PAGE);
 
     // res.json(articles);
-
     res.render("blog/articles", {
       pageTitle: "Articles",
       path: "/articles",
       isLoggedIn: req.session.isLoggedIn,
       articles: articles,
-      prevSearch: title
+      prevSearch: title,
+      hasPrevPage: page > 1,
+      hasNextPage: ITEMS_PER_PAGE * page < totalItems,
+      nextPage: page + 1,
+      prevPage: page - 1
     });
 
   } catch (err) {

@@ -1,7 +1,20 @@
 const Article = require("../models/article");
 const calcReadingTime = require("../utils/reading_time");
 
-// const cloudinary = require('cloudinary').v2;
+const cloudinary = require("cloudinary").v2;
+// const Datauri = require("datauri");
+const path = require("path");
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// const dUri = new Datauri();
+
+// const dataUri = (req) =>
+//   dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
 
 exports.getCreateArticle = (req, res, next) => {
   return res.render("user/create-article", {
@@ -26,26 +39,30 @@ exports.postCreateArticle = async (req, res, next) => {
     return tag.trim();
   });
 
-  const body = req.body.body;
-
-  const publish = req.body.publish;
-  // const coverImage = req.body.coverImage
-  const author = req.session.user;
-  const reading_time = calcReadingTime.calcReadingTime(body);
-  const article = new Article({
-    title,
-    description,
-    author,
-    reading_time,
-    tags,
-    body,
-  });
-
-  if (publish) {
-    article.state = "published";
-  }
-
   try {
+    // const file = dataUri(req).content;
+    // console.log(file);
+
+    // const image = (await cloudinary.uploader.upload(file)).url;
+
+    const body = req.body.body;
+
+    const publish = req.body.publish;
+    const author = req.session.user;
+    const reading_time = calcReadingTime.calcReadingTime(body);
+    const article = new Article({
+      title,
+      description,
+      author,
+      reading_time,
+      tags,
+      body,
+    });
+
+    if (publish) {
+      article.state = "published";
+    }
+
     await article.save();
     res.redirect("my-articles");
   } catch (err) {
@@ -88,13 +105,13 @@ exports.getEditArticle = async (req, res, next) => {
       path: " ",
       isLoggedIn: req.session.isLoggedIn,
       article: article,
-      errorMessage: '',
+      errorMessage: "",
       oldInput: {
         title: article.title,
         description: article.description,
         body: article.body,
         tags: article.tags,
-      }
+      },
     });
   } catch (err) {
     const error = new Error(err);
