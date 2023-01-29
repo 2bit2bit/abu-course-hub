@@ -12,7 +12,6 @@ router.get("/create-article", isAuth, userController.getCreateArticle);
 router.post(
   "/create-article",
   isAuth,
-  validateCreateArticle,
   userController.postCreateArticle
 );
 

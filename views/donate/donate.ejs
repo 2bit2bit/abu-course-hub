@@ -1,0 +1,16 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/create-article.css">
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <form class="form" action="/donate" method="post">
+            <input type="text" name="full_name" id="full_name" placeholder="full_name">
+            <input type="email" name="email" id="email" placeholder="email">
+            <input type="number" name="amount" id="amount" placeholder="amount">
+            <button type="submit">submit</button>
+        </form>
+    </main>
+
+<%- include('../includes/end.ejs') %>

@@ -12,7 +12,7 @@
        
         <% for(var i = 0; i < articles.length; i++) { %>
           <a class='article' href="article/<%= articles[i]._id%>">
-                <img src="/img/default-cover.webp" alt="cover-photo">
+                <img src="<%= articles[i].image %>" alt="cover-photo">
                 <div>
                    <div>
                      <h2><%= articles[i].title %></h2>                   

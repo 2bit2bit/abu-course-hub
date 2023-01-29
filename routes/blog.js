@@ -8,7 +8,4 @@ router.get('/article/:articleId', blogController.getArticle)
 router.get('/articles',blogController.getArticles)
 router.get('/',blogController.getArticles)
 
-
-
-
 module.exports = router

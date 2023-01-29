@@ -35,7 +35,10 @@ const articleSchema = new Schema({
     default: Date.now,
     required: true,
   },
-  image: String
+  image: {
+   type: String,
+   default: "/img/default-cover.webp"
+  }
 });
 
 module.exports = mongoose.model("Article", articleSchema);

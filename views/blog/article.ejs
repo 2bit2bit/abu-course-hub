@@ -5,7 +5,7 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <img class = 'cover-photo' src="/img/default-cover.webp" alt="Cover Photo">
+        <img class = 'cover-photo' src="<%= article.image %>" alt="Cover Photo">
         <h1><%= article.title %></h1> 
         <p class="details">
             <span><i class='fas fa-clock'></i> <%= article.reading_time %></span>

@@ -6,11 +6,21 @@ const path = require("path");
 require("dotenv").config();
 
 const flash = require("connect-flash");
+
+const cloudinary = require("cloudinary").v2;
 const multer = require('multer')
+
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 
 const errorController = require("./controllers/error");
 const blogRoutes = require("./routes/blog");
+const donateRoutes = require("./routes/donate");
 const authRoutes = require("./routes/auth");
 const userRoute = require("./routes/user");
 
@@ -63,6 +73,7 @@ app.use((req, res, next) => {
 
 app.use(authRoutes);
 app.use(blogRoutes);
+app.use(donateRoutes)
 app.use(userRoute);
 app.use(errorController.get404);
 

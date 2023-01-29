@@ -235,3 +235,14 @@ footer {
   text-align: center;
   box-shadow: 2px 2px 2px #00000042;
 }
+
+footer a {
+  color: white;
+  text-decoration: none;
+  padding: 0 1rem;
+}
+
+footer a:hover,
+footer a:active {
+  color: #585858
+}

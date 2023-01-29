@@ -1,20 +1,10 @@
 const Article = require("../models/article");
 const calcReadingTime = require("../utils/reading_time");
-
-const cloudinary = require("cloudinary").v2;
-// const Datauri = require("datauri");
+const Datauri = require("datauri/parser");
 const path = require("path");
 
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
-// const dUri = new Datauri();
-
-// const dataUri = (req) =>
-//   dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
+const cloudinary = require("cloudinary").v2;
+const parser = new Datauri();
 
 exports.getCreateArticle = (req, res, next) => {
   return res.render("user/create-article", {
@@ -40,10 +30,19 @@ exports.postCreateArticle = async (req, res, next) => {
   });
 
   try {
-    // const file = dataUri(req).content;
-    // console.log(file);
-
-    // const image = (await cloudinary.uploader.upload(file)).url;
+    let image;
+    if (req.file) {
+      const dataUri = (req) =>
+        parser.format(
+          path.extname(req.file.originalname).toString(),
+          req.file.buffer
+        );
+      const file = dataUri(req).content;
+      
+      image = (await cloudinary.uploader.upload(file, {quality: 10})).url;
+    } else {
+      image = "/img/default-cover.webp";
+    }
 
     const body = req.body.body;
 
@@ -57,6 +56,7 @@ exports.postCreateArticle = async (req, res, next) => {
       reading_time,
       tags,
       body,
+      image,
     });
 
     if (publish) {
