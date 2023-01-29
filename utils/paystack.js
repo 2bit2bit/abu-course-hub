@@ -1,5 +1,7 @@
+require('dotenv').config()
+
 const paystack = (request) => {
-  const MySecretKey = "Bearer sk_test_c2d235e9bf7b669a13737b7a6b34699eba6a60c4";
+  const MySecretKey = process.env.PAYSTACK_MySecretKey;
 
   const initializePayment = (form, mycallback) => {
     const options = {

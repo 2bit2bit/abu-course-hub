@@ -1,10 +1,9 @@
-const paystack = require("../utils/paystack");
 const _ = require("lodash");
 const path = require("path");
 const Donor = require("../models/donor");
-// import request from "request";
-
-const { initializePayment, verifyPayment } = paystack;
+const request = require("request");
+const { initializePayment, verifyPayment } =
+  require("../utils/paystack")(request);
 
 exports.getDonate = (req, res, next) => {
   res.render("donate/donate", {
@@ -22,7 +21,6 @@ exports.postDonate = (req, res, next) => {
 
   initializePayment(form, (error, body) => {
     if (error) {
-      //handle errors
       console.log(error);
       return;
     }
@@ -35,7 +33,6 @@ exports.getDonateCallback = (req, res, next) => {
   const ref = req.query.reference;
   verifyPayment(ref, (error, body) => {
     if (error) {
-      //handle errors appropriately
       console.log(error);
       return res.redirect("/donate_error");
     }
@@ -73,6 +70,7 @@ exports.getDonateReciept = (req, res, next) => {
       res.render("donate/donate_success", {
         pageTitle: "Donate Success",
         path: "",
+        donor,
       });
     })
     .catch((e) => {
