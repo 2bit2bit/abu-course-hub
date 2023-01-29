@@ -202,7 +202,7 @@ exports.postResetPassword = async (req, res, next) => {
       subject: "Alticles Password Reset",
       html: `
       <p>You requested for a password reset</p>
-      <p>click this <a href="http://localhost:8080/update-password/${token}">link</a> below to reset password</p>
+      <p>click this <a href="http://odd-cyan-viper-cuff.cyclic.app/update-password/${token}">link</a> below to reset password</p>
       `,
     };
 
