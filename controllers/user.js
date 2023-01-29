@@ -38,8 +38,8 @@ exports.postCreateArticle = async (req, res, next) => {
           req.file.buffer
         );
       const file = dataUri(req).content;
-      
-      image = (await cloudinary.uploader.upload(file, {quality: 10})).url;
+
+      image = (await cloudinary.uploader.upload(file, { quality: 10 })).url;
     } else {
       image = "/img/default-cover.webp";
     }
@@ -188,10 +188,14 @@ exports.postDeletetArticle = async (req, res, next) => {
   const articleId = req.params.articleId;
 
   try {
-    const response = await Article.deleteOne({
+    const article = await Article.findOneAndDelete({
       _id: articleId,
       author: req.session.user,
     });
+
+    cloudinary.uploader.destroy(article.image.split('/')[7].split('.')[0],  function(error,result) {
+      console.log(result, error) });
+
     res.redirect("/my-articles");
   } catch (err) {
     const error = new Error(err);
