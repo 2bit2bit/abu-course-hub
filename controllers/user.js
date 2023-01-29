@@ -41,7 +41,19 @@ exports.postCreateArticle = async (req, res, next) => {
 
       image = (await cloudinary.uploader.upload(file, { quality: 10 })).url;
     } else {
-      image = "/img/default-cover.webp";
+      return res.status(422).render("user/create-article", {
+        pageTitle: "Create Article",
+        path: "/create-article",
+        isLoggedIn: req.session.isLoggedIn,
+        errorMessage: "invalid image",
+        oldInput: {
+          title: req.body.title,
+          description: req.body.description,
+          body: req.body.body,
+          tags: req.body.tags,
+          publish: req.body.publish,
+        },
+      });
     }
 
     const body = req.body.body;
@@ -77,7 +89,7 @@ exports.getMyArticles = async (req, res, next) => {
   try {
     const articles = await Article.find({
       author: req.session.user,
-    });
+    }).sort({ timestamp: -1 });
 
     res.render("user/my-articles", {
       pageTitle: "My Articles",
@@ -193,9 +205,14 @@ exports.postDeletetArticle = async (req, res, next) => {
       author: req.session.user,
     });
 
-    cloudinary.uploader.destroy(article.image.split('/')[7].split('.')[0],  function(error,result) {
-      console.log(result, error) });
-
+    if (article.image.split("/").length > 7) {
+      cloudinary.uploader.destroy(
+        article.image.split("/")[7].split(".")[0],
+        function (error, result) {
+          console.log(result, error);
+        }
+      );
+    }
     res.redirect("/my-articles");
   } catch (err) {
     const error = new Error(err);

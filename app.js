@@ -26,19 +26,27 @@ const userRoute = require("./routes/user");
 
 const app = express();
 
-dbConnect.connect();
-
 const PORT = process.env.PORT;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
-
 const storage = multer.memoryStorage();
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg' ||
+    file.mimetype === 'image/jpeg'
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
 
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
-app.use(multer({ storage }).single('coverImage'))
+app.use(multer({ storage: storage, fileFilter: fileFilter }).single('coverImage'))
 
 const store = new MongoDBStore(
   {
@@ -85,6 +93,8 @@ app.use((error, req, res, next) => {
   });
 });
 
+
 app.listen(PORT, () => {
   console.log(`http//localhost:${PORT}`);
+  dbConnect.connect();
 });

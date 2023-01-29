@@ -27,10 +27,10 @@ const validateEditArticle = async (req, res, next) => {
 };
 
 const editArticleValidator = Joi.object({
-  title: Joi.string().min(4).max(50).required().trim(),
-  description: Joi.string().min(4).max(50).required().trim(),
-  body: Joi.string().min(15).max(500).required().trim(),
-  tags: Joi.string().min(4).max(50).required().trim(),
+  title: Joi.string().min(4).max(60).required().trim(),
+  description: Joi.string().min(10).max(160).required().trim(),
+  body: Joi.string().min(30).max(32000).required().trim(),
+  tags: Joi.string().min(0).max(50).trim(),
   publish: Joi.any(),
 });
 

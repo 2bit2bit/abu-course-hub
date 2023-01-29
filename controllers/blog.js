@@ -4,7 +4,7 @@ const Article = require("../models/article");
 exports.getIndex = (req, res, next) => {
   res.render("blog/index", {
     pageTitle: "Home",
-    path: "/home"
+    path: "/home",
   });
 };
 
@@ -27,16 +27,15 @@ exports.getArticles = async (req, res, next) => {
   // if (author) {
   //   findQuery.author = author;
   // }
-  const title = req.query.title
-  const regex = new RegExp(title, 'i') 
+  const title = req.query.title;
+  const regex = new RegExp(title, "i");
 
- let page = parseInt(req.query.page) 
+  let page = parseInt(req.query.page);
 
-  if(!page) {
-    page = 1
+  if (!page) {
+    page = 1;
   }
-  const ITEMS_PER_PAGE = 2
-
+  const ITEMS_PER_PAGE = 5;
 
   // if (title) {
   //   findQuery.title = title;
@@ -67,10 +66,18 @@ exports.getArticles = async (req, res, next) => {
   // }
 
   try {
-    const totalItems = await Article.find({state: "published", title: {$regex: regex}}).count()
-    const articles = await Article.find({state: "published", title: {$regex: regex}}).populate("author", "username")
-    .skip((page - 1) * ITEMS_PER_PAGE)
-    .limit(ITEMS_PER_PAGE);
+    const totalItems = await Article.find({
+      state: "published",
+      title: { $regex: regex },
+    }).count();
+    const articles = await Article.find({
+      state: "published",
+      title: { $regex: regex },
+    })
+      .populate("author", "username")
+      .sort({ timestamp: -1 })
+      .skip((page - 1) * ITEMS_PER_PAGE)
+      .limit(ITEMS_PER_PAGE);
 
     // res.json(articles);
     res.render("blog/articles", {
@@ -82,9 +89,8 @@ exports.getArticles = async (req, res, next) => {
       hasPrevPage: page > 1,
       hasNextPage: ITEMS_PER_PAGE * page < totalItems,
       nextPage: page + 1,
-      prevPage: page - 1
+      prevPage: page - 1,
     });
-
   } catch (err) {
     const error = new Error(err);
     error.httpStatusCode = 500;
@@ -93,28 +99,27 @@ exports.getArticles = async (req, res, next) => {
   }
 };
 
-
 exports.getArticle = async (req, res, next) => {
   const { articleId } = req.params;
 
   if (!mongoose.isValidObjectId(articleId)) {
-    return res.status(404).render('404', {
-      pageTitle: 'Page Not Found',
-      path: '/404',
-      isLoggedIn: req.session.isLoggedIn
+    return res.status(404).render("404", {
+      pageTitle: "Page Not Found",
+      path: "/404",
+      isLoggedIn: req.session.isLoggedIn,
     });
   }
   try {
     const article = await Article.findOne({
       _id: articleId,
       state: "published",
-    }).populate("author", "username")
+    }).populate("author", "username");
 
-    if(!article) {
-     return res.status(404).render('404', {
-        pageTitle: 'Page Not Found',
-        path: '/404',
-        isLoggedIn: req.session.isLoggedIn
+    if (!article) {
+      return res.status(404).render("404", {
+        pageTitle: "Page Not Found",
+        path: "/404",
+        isLoggedIn: req.session.isLoggedIn,
       });
     }
 
