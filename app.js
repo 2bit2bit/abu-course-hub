@@ -8,15 +8,13 @@ require("dotenv").config();
 const flash = require("connect-flash");
 
 const cloudinary = require("cloudinary").v2;
-const multer = require('multer')
-
+const multer = require("multer");
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-
 
 const errorController = require("./controllers/error");
 const blogRoutes = require("./routes/blog");
@@ -32,9 +30,9 @@ const SESSION_SECRET = process.env.SESSION_SECRET;
 const storage = multer.memoryStorage();
 const fileFilter = (req, file, cb) => {
   if (
-    file.mimetype === 'image/png' ||
-    file.mimetype === 'image/jpg' ||
-    file.mimetype === 'image/jpeg'
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
   ) {
     cb(null, true);
   } else {
@@ -46,7 +44,9 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
-app.use(multer({ storage: storage, fileFilter: fileFilter }).single('coverImage'))
+app.use(
+  multer({ storage: storage, fileFilter: fileFilter }).single("coverImage")
+);
 
 const store = new MongoDBStore(
   {
@@ -81,7 +81,7 @@ app.use((req, res, next) => {
 
 app.use(authRoutes);
 app.use(blogRoutes);
-app.use(donateRoutes)
+app.use(donateRoutes);
 app.use(userRoute);
 app.use(errorController.get404);
 
@@ -93,8 +93,8 @@ app.use((error, req, res, next) => {
   });
 });
 
-
-app.listen(PORT, () => {
-  console.log(`http//localhost:${PORT}`);
-  dbConnect.connect();
-});
+dbConnect.connect(
+  app.listen(PORT, () => {
+    console.log(`http//localhost:${PORT}`);
+  })
+);
