@@ -33,6 +33,9 @@ article .detail {
     overflow: hidden;
 }
 
+.detail p {
+  color: #7a7a7a;
+}
 
 .details span {
   margin-right: 8px;
