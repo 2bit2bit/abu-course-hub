@@ -39,7 +39,7 @@ exports.postCreateArticle = async (req, res, next) => {
         );
       const file = dataUri(req).content;
 
-      image = (await cloudinary.uploader.upload(file, { quality: 10 })).url;
+      image = (await cloudinary.uploader.upload(file, { quality: 30 })).url;
     } else {
       return res.status(422).render("user/create-article", {
         pageTitle: "Create Article",
