@@ -2,7 +2,7 @@ a.article {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 16px;
-    padding: 4px;
+    padding: 16px;
     max-width: 65rem;
     height: 12rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.247);
