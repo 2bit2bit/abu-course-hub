@@ -1,16 +1,17 @@
 a.article {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     gap: 16px;
-    padding: 4px; 
+    padding: 4px;
     max-width: 65rem;
-    height: 10rem;
+    height: 12rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.247);
     background-color: rgb(255, 255, 255);
-    margin:  16px auto; 
+    margin:  24px auto; 
     text-decoration: none;
     color: black;
-    overflow: hidden;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.096);
+
 }
 
 a.article:hover {
@@ -18,83 +19,41 @@ a.article:hover {
     background-color: #eeeeee;
 }
 
-a.article img {
-    width: 40%;
-    object-fit: cover;
+a.article img{
+ width: 100%;
+ height: calc(12rem - 8px);
+ object-fit: cover;
 }
 
-a.article > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
+a.article .detail {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr ;
+    gap: 4px;
+    height: calc(12rem - 8px);
 }
 
-a.article div div:first-child {
-    width: 99%;
-    max-height: 60%;
+a.article .detail h2,
+a.article .detail p{
+    margin: 0;
+    white-space: wrap;
     overflow: hidden;
-    text-overflow: ellipsis;   
-}
-a.article h2 {
-    width: 97%;
-    margin:8px 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    white-space: nowrap;  
 }
 
-a.article p {
-    margin: 0 0;
-    height: 4rem;
+a.article .detail .details span {
+    margin-right: 8px;
+    color: #7a7a7a;
 }
 
-
-a.article .details {
-    flex-direction: row;
-    margin: 1rem 0;
-    color: rgb(116, 116, 116);
-}
-
-a.article .details span {
-    padding-right: 1rem;
-}
-
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px) { 
     a.article {
-        flex-direction: column;
-        height: 16rem;
-        gap: 2px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        height: 24rem;
     }
 
-     a.article img {
-        width: 100%;
-        height: 50%;
-        object-fit: cover;
+    a.article .detail {
+        height: calc(12rem - 16px);
     }
-    
-    a.article > div {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 100%;
-        height: 50%;
-    }
-    
-    a.article div div:first-child {
-        width: 100%;
-        max-height:auto;
-        overflow:hidden
-   }
-      a.article h2 {
-        width: 100%;
-        margin:8px 0;
-        white-space: wrap;
-        overflow: auto;
-        text-overflow: ellipsis; 
-    }
-   
 }
 
 .search {

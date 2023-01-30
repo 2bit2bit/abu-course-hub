@@ -11,19 +11,17 @@
       </form>
        
         <% for(var i = 0; i < articles.length; i++) { %>
-          <a class='article' href="article/<%= articles[i]._id%>">
-                <img src="<%= articles[i].image %>" alt="cover-photo">
-                <div>
-                   <div>
-                     <h2><%= articles[i].title %></h2>                   
-                     <p><%= articles[i].description %></p>
-                   </div>                 
+          <a class='article' href="article/<%= articles[i]._id%>">                
+                  <img src="<%= articles[i].image %>" alt="cover-photo">
+                  <div class="detail">
+                    <h2><%= articles[i].title %></h2>                   
+                    <p><%= articles[i].description %></p>                   
                    <div class="details">                  
                      <span><i class='fas fa-clock'></i>  <%= articles[i].reading_time %></span>
                      <span><i class='fas fa-book-reader'></i> <%= articles[i].read_count %>  </span>
                      <span><i class='fas fa-user-alt'></i> <%= articles[i].author.username %></span>
                    </div>
-                </div>                
+                  </div>                
            </a>
         <% } %>
         <section class="pagination">

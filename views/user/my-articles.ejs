@@ -9,21 +9,16 @@
         <h1>Your Articles</h1>
 
         <% for(var i = 0; i < articles.length; i++) { %>
-            <article>
-              
-                <img src="<%= articles[i].image %>" alt="cover-photo">
-        
-                <div  class = 'detail'>
-                  <div>  
-                    <h3><%= articles[i].title %></h3>
-                    <p><%= articles[i].description %></p>
-                  </div>
+            <article>              
+                <img src="<%= articles[i].image %>" alt="cover-photo">        
+                <div  class = 'detail'>                  
+                  <h3><%= articles[i].title %></h3>
+                  <p><%= articles[i].description %></p>                  
                   <div class="details">                  
                     <span><i class='fas fa-clock'></i>  <%= articles[i].reading_time %></span>
                     <span><i class='fas fa-book-reader'></i> <%= articles[i].read_count %>  </span>
                   </div>
-                </div>  
-
+                </div>
                 <div class = 'btns'>
                   <a class='edit-article' href="edit-article/<%=articles[i]._id%>">Edit</a> 
                   <form action="/edit-article/<%=articles[i]._id%>/update_state" method="post">
@@ -41,11 +36,7 @@
                         Delete                          
                     </button>                  
                   </form>            
-                </div>
-
-
-                
-
+                </div>             
             </article> 
         <% } %>
 
