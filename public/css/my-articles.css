@@ -15,7 +15,7 @@ article {
 
 article img {
   width: 100%;
-  height: calc(12rem - 8px);
+  height: calc(12rem - 32px);
   object-fit: cover;
 }
 
@@ -23,7 +23,7 @@ article .detail {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   gap: 4px;
-  height: calc(12rem - 8px);
+  height: calc(12rem - 32px);
 }
 
 .detail h3,

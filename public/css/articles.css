@@ -20,7 +20,7 @@ a.article:hover {
 
 a.article img {
   width: 100%;
-  height: calc(12rem - 8px);
+  height: calc(12rem - 32px);
   object-fit: cover;
 }
 
@@ -28,7 +28,7 @@ a.article .detail {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   gap: 4px;
-  height: calc(12rem - 8px);
+  height: calc(12rem - 32px);
 }
 
 a.article .detail h2,
@@ -55,7 +55,7 @@ a.article .detail .details span {
   }
 
   a.article .detail {
-    height: calc(12rem - 16px);
+    height: calc(12rem - 32px);
   }
 }
 
