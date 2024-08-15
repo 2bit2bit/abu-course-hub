@@ -7,24 +7,47 @@
     <link rel="stylesheet" href="/css/articles.css" />
     <link rel="stylesheet" href="/css/home.css" />
     <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/live-updates.css" />
+    <!-- Add your custom CSS -->
   </head>
 
   <body>
+    <div class="mobile-nav">
+      <button class="mobile-nav_close">X</button>
+      <nav>
+        <ul>
+          <li>
+            <a class="active" href="/">Home</a>
+          </li>
+          <li>
+            <a class="" href="/knowledgehub.html">Knowledge Hub</a>
+          </li>
+          <li>
+            <a class="active" href="/live.html">Weather</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
     <header>
       <a href="/" class="logo">
         <img src="/img/farm2u-logo.png" alt="farm2u_logo" /><br />
       </a>
+
       <nav>
         <ul>
           <li>
-            <a href="/">Home</a>
+            <a class="active" href="/">Home</a>
           </li>
-          <!-- Add the new menu item here -->
           <li>
-            <a href="/live.html">Weather</a>
+            <a class="" href="/knowledgehub.html">Knowledge Hub</a>
+          </li>
+          <li>
+            <a class="active" href="/live.html">Weather</a>
           </li>
         </ul>
       </nav>
+
       <div class="mobile-nav_toggle">
         <button class="mobile-nav_toggle-btn">
           <img src="/img/menu.svg" alt="toggle-btn" />
@@ -61,5 +84,22 @@
     <footer>Software Engineering Project</footer>
 
     <script src="/js/main.js"></script>
+    <script>
+      // JavaScript for mobile navigation toggle
+      const navOpen = document.querySelector(".mobile-nav_toggle-btn");
+      const navClose = document.querySelector(".mobile-nav_close");
+      const mobileNav = document.querySelector(".mobile-nav");
+
+      const openNav = () => {
+        mobileNav.style.right = "0";
+      };
+
+      const closeNav = () => {
+        mobileNav.style.right = "-20rem";
+      };
+
+      navOpen.addEventListener("click", openNav);
+      navClose.addEventListener("click", closeNav);
+    </script>
   </body>
 </html>
