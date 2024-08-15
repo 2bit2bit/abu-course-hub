@@ -8,7 +8,7 @@ const parser = new Datauri();
 
 exports.getCreateArticle = (req, res, next) => {
   return res.render("user/create-article", {
-    pageTitle: "Create Article",
+    pageTitle: "Add Product",
     path: "/create-article",
     isLoggedIn: req.session.isLoggedIn,
     errorMessage: "",
@@ -42,7 +42,7 @@ exports.postCreateArticle = async (req, res, next) => {
       image = (await cloudinary.uploader.upload(file, { quality: 30 })).url;
     } else {
       return res.status(422).render("user/create-article", {
-        pageTitle: "Create Article",
+        pageTitle: "Add Product",
         path: "/create-article",
         isLoggedIn: req.session.isLoggedIn,
         errorMessage: "invalid image",
@@ -92,7 +92,7 @@ exports.getMyArticles = async (req, res, next) => {
     }).sort({ timestamp: -1 });
 
     res.render("user/my-articles", {
-      pageTitle: "My Articles",
+      pageTitle: "My Products",
       path: "/my-articles",
       isLoggedIn: req.session.isLoggedIn,
       articles: articles,

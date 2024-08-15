@@ -10,9 +10,9 @@
        <% } %> 
         <form class="auth-form" action="/signup" method="POST" novalidate>            
             <div>
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="email" value="<%= oldInput.email %>">
-            </div>
+                <label for="phoneNumber">WhatsApp Number</label>
+                <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" value="<%= oldInput.phoneNumber %>">
+            </div>            
             <div>
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" placeholder="username" minlength="4" maxlength="20" value="<%= oldInput.username %>">           

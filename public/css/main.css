@@ -6,7 +6,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #eeeeee;
+  background-color: #fbfff3;
   position: relative;
 
 }
@@ -245,4 +245,23 @@ footer a {
 footer a:hover,
 footer a:active {
   color: #585858
+}
+
+/* In your /css/main.css or any other relevant stylesheet */
+
+.weather-section {
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.weather-section h2 {
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.weatherwidget-io {
+  display: inline-block;
 }

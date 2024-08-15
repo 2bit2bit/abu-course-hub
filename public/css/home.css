@@ -1,0 +1,112 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding: 20px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+}
+
+.hero p {
+    font-size: 1.2em;
+    color: #555;
+    margin: 20px 0;
+}
+
+/* Sign-In & Login Buttons */
+.sign-in__login2 {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.sign-in__login2 li {
+    margin: 0;
+}
+
+.sign-in__login2 a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+.sign-in__login2 a.active,
+.sign-in__login2 a:hover {
+    background-color: #0056b3;
+}
+
+.sign-in__login2 a.sign-up {
+    background-color: #007bff;
+}
+
+.sign-in__login2 a.sign-up.active,
+.sign-in__login2 a.sign-up:hover {
+    background-color: #0056b3;
+}
+
+.sign-in__login2 a:not(.sign-up) {
+    background-color: #28a745;
+}
+
+/* Features Section */
+.features {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0;
+}
+
+.feature {
+    text-align: center;
+    flex: 1;
+    margin: 0 15px;
+}
+
+.feature i {
+    font-size: 3em;
+    color: #5cb85c;
+    margin-bottom: 10px;
+}
+
+.feature h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    color: #555;
+    font-size: 1em;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature {
+        margin: 20px 0;
+    }
+}

@@ -1,79 +1,187 @@
 <body>
-    <div class="mobile-nav">
-      <button class="mobile-nav_close">X</button>
-  
-      
-        <nav>
-          <ul>
-            <li><a class="<%= path === '/articles' ? 'active' : '' %>" href="/articles">All Articles</a></li>
-          </ul>
-          
-          <% if (!isLoggedIn) { %> 
-          <ul class="sign-in__login">
-            <li><a class="<%= path === '/login' ? 'active' : ' ' %>" href="/login">Login</a></li>
-            <li><a class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>" href="/signup">Sign Up</a></li>
-          </ul>
-        <% } else { %>
-          <ul class="sign-in__login"> 
-            <li>              
-              <a class="<%= path === '/create-article' ? 'sign-up active' : 'sign-up'  %>" href="/create-article">
-                <i class='fas fa-pencil-alt'></i>
-                Write Article
-              </a>              
-            </li>
-            <li>              
-              <a class="<%= path === '/my-articles' ? ' active' : ' '  %>" href="/my-articles">
-                My Articles
-              </a>
-              </li>
-              <form action="/logout" method="post">
-                <button class= 'logout' type="submit">Logout</button>
-              </form>
-            
-          </ul>
-          <% } %>
+  <div class="mobile-nav">
+    <button class="mobile-nav_close">X</button>
 
-        </nav>
-    </div>
-  
-  
-      <header>
-          <a href="/" class="logo">
-            <img src="/img/alticle_logo.jpg" alt="alticle_logo" /><br />
+    <nav>
+      <% if (!isLoggedIn) { %>
+      <ul>
+        <li>
+          <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
+        </li>
+        <li>
+          <a
+            class="<%= path === '/knowledgehub.html' ? 'active' : '' %>"
+            href="/knowledgehub.html"
+            >Knowledge Hub</a
+          >
+        </li>
+        <li>
+          <a
+            class="<%= path === '/live.html' ? 'active' : '' %>"
+            href="/live.html"
+            >Weather</a
+          >
+        </li>
+      </ul>
+      <ul class="sign-in__login">
+        <li>
+          <a class="<%= path === '/login' ? 'active' : '' %>" href="/login"
+            >Login</a
+          >
+        </li>
+        <li>
+          <a
+            class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>"
+            href="/signup"
+            >Sign Up</a
+          >
+          >
+        </li>
+      </ul>
+      <% } else { %>
+      <ul>
+        <li>
+          <a
+            class="<%= path === '/knowledgehub.html' ? 'active' : '' %>"
+            href="/knowledgehub.html"
+            >Knowledge Hub</a
+          >
+        </li>
+        <li>
+          <a
+            class="<%= path === '/live.html' ? 'active' : '' %>"
+            href="/live.html"
+            >Weather</a
+          >
+        </li>
+        <li>
+          <a
+            class="<%= path === '/articles' ? 'active' : '' %>"
+            href="/articles"
+            >All Products</a
+          >
+        </li>
+      </ul>
+      <ul class="sign-in__login">
+        <li>
+          <a
+            class="<%= path === '/create-article' ? 'sign-up active' : 'sign-up' %>"
+            href="/create-article"
+          >
+            <i class="fas fa-pencil-alt"></i>
+            Add Product
           </a>
-    
-          <nav>
-            <ul>
-              <li><a class="<%= path === '/articles' ? 'active' : '' %>" href="/articles">All Articles</a></li>
-            </ul>
-            <% if (!isLoggedIn) { %> 
-          <ul class="sign-in__login">
-            <li><a class="<%= path === '/login' ? 'active' : ' ' %>" href="/login">Login</a></li>
-            <li><a class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>" href="/signup">Sign Up</a></li>
-          </ul>
-        <% } else { %>
-          <ul class="sign-in__login">
-            <li>              
-              <a class="<%= path === '/create-article' ? 'sign-up active' : 'sign-up'  %>" href="/create-article">
-                <i class='fas fa-pencil-alt'></i>
-                Write Article
-              </a>              
-            </li>
-            <li>              
-              <a class="<%= path === '/my-articles' ? ' active' : ' '  %>" href="/my-articles">
-                My Articles
-              </a>              
-            </li>
-            <form action="/logout" method="post">
-              <button class= 'logout' type="submit">Logout</button>
-            </form>
-          </ul>
-          <% } %>
-          </nav>
-  
-          <div class="mobile-nav_toggle">
-            <button class="mobile-nav_toggle-btn">
-              <img src="/img/menu.svg" alt="toggle-btn" />
-            </button>
-          </div>
-        </header>
+        </li>
+        <li>
+          <a
+            class="<%= path === '/my-articles' ? 'active' : '' %>"
+            href="/my-articles"
+          >
+            My Products
+          </a>
+        </li>
+        <form action="/logout" method="post">
+          <button class="logout" type="submit">Logout</button>
+        </form>
+      </ul>
+      <% } %>
+    </nav>
+  </div>
+
+  <header>
+    <a href="/" class="logo">
+      <img src="/img/farm2u-logo.png" alt="farm2u_logo" /><br />
+    </a>
+
+    <nav>
+      <% if (!isLoggedIn) { %>
+      <ul>
+        <li>
+          <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
+        </li>
+        <li>
+          <a
+            class="<%= path === '/knowledgehub.html' ? 'active' : '' %>"
+            href="/knowledgehub.html"
+            >Knowledge Hub</a
+          >
+        </li>
+        <li>
+          <a
+            class="<%= path === '/live.html' ? 'active' : '' %>"
+            href="/live.html"
+            >Weather</a
+          >
+        </li>
+      </ul>
+      <ul class="sign-in__login">
+        <li>
+          <a class="<%= path === '/login' ? 'active' : '' %>" href="/login"
+            >Login</a
+          >
+        </li>
+        <li>
+          <a
+            class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>"
+            href="/signup"
+            >Sign Up</a
+          >
+          >
+        </li>
+      </ul>
+      <% } else { %>
+      <ul>
+        <li>
+          <a
+            class="<%= path === '/knowledgehub.html' ? 'active' : '' %>"
+            href="/knowledgehub.html"
+            >Knowledge Hub</a
+          >
+        </li>
+        <li>
+          <a
+            class="<%= path === '/live.html' ? 'active' : '' %>"
+            href="/live.html"
+            >Weather</a
+          >
+        </li>
+        <li>
+          <a
+            class="<%= path === '/articles' ? 'active' : '' %>"
+            href="/articles"
+            >All Products</a
+          >
+        </li>
+      </ul>
+      <ul class="sign-in__login">
+        <li>
+          <a
+            class="<%= path === '/create-article' ? 'sign-up active' : 'sign-up' %>"
+            href="/create-article"
+          >
+            <i class="fas fa-pencil-alt"></i>
+            Add Product
+          </a>
+        </li>
+        <li>
+          <a
+            class="<%= path === '/my-articles' ? 'active' : '' %>"
+            href="/my-articles"
+          >
+            My Products
+          </a>
+        </li>
+        <form action="/logout" method="post">
+          <button class="logout" type="submit">Logout</button>
+        </form>
+      </ul>
+      <% } %>
+    </nav>
+
+    <div class="mobile-nav_toggle">
+      <button class="mobile-nav_toggle-btn">
+        <img src="/img/menu.svg" alt="toggle-btn" />
+      </button>
+    </div>
+  </header>
+</body>

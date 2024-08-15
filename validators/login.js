@@ -12,26 +12,34 @@ const validateLogin = async (req, res, next) => {
       errorMessage: err.message,
       oldInput: {
         email: req.body.email,
-        password:  req.body.password,
+        password: req.body.password,
       },
-    });    
+    });
   }
 };
 
 const loginValidator = Joi.object({
-  email: Joi.string()
+  phoneNumber: Joi.string()
     .trim()
-    .lowercase()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
+    .custom((value, helpers) => {
+      // Ensure the phone number starts with +234
+      if (!value.startsWith("+234")) {
+        return helpers.message(
+          "It must be a Nigerian number starting with +234"
+        );
+      }
+
+      // Validate the phone number format
+      const phoneNumberPattern = /^\+234\d{10}$/;
+      if (!phoneNumberPattern.test(value)) {
+        return helpers.message("It must be a valid Nigerian number");
+      }
+
+      return value; // Return the validated phone number
     })
     .required(),
 
-  password: Joi.string()
-    .trim()
-    .required()
- 
+  password: Joi.string().trim().required(),
 });
 
 module.exports = validateLogin;

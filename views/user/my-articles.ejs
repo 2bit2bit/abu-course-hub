@@ -6,7 +6,7 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <h1>Your Articles</h1>
+        <h1>Your Products</h1>
 
         <% for(var i = 0; i < articles.length; i++) { %>
             <article>              
@@ -15,8 +15,7 @@
                   <h3><%= articles[i].title %></h3>
                   <p><%= articles[i].description %></p>                  
                   <div class="details">                  
-                    <span><i class='fas fa-clock'></i>  <%= articles[i].reading_time %></span>
-                    <span><i class='fas fa-book-reader'></i> <%= articles[i].read_count %>  </span>
+                    <span><i class='fas fa-eye'></i> <%= articles[i].read_count %>  </span>
                   </div>
                 </div>
                 <div class = 'btns'>

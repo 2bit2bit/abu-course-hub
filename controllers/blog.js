@@ -81,7 +81,7 @@ exports.getArticles = async (req, res, next) => {
 
     // res.json(articles);
     res.render("blog/articles", {
-      pageTitle: "Articles",
+      pageTitle: "Farm2u Zaria",
       path: "/articles",
       isLoggedIn: req.session.isLoggedIn,
       articles: articles,
@@ -113,7 +113,7 @@ exports.getArticle = async (req, res, next) => {
     const article = await Article.findOne({
       _id: articleId,
       state: "published",
-    }).populate("author", "username");
+    }).populate("author", "username phoneNumber"); //todo
 
     if (!article) {
       return res.status(404).render("404", {
@@ -126,7 +126,7 @@ exports.getArticle = async (req, res, next) => {
     article.read_count++;
 
     article.save();
-
+    // console.log(article);
     res.render("blog/article", {
       pageTitle: article.title,
       path: " ",
