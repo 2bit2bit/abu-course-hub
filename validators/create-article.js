@@ -23,8 +23,8 @@ const validateCreateArticle = async (req, res, next) => {
 
 const createArticleValidator = Joi.object({
   title: Joi.string().min(4).max(60).required().trim(),
-  description: Joi.string().min(10).max(160).required().trim(),
-  body: Joi.string().min(30).max(32000).required().trim(),
+  description: Joi.string().min(3).max(160).required().trim(),
+  body: Joi.string().min(5).max(32000).required().trim(),
   tags: Joi.string().min(0).max(50).trim(),
   publish: Joi.any(),
 });
