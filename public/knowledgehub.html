@@ -35,13 +35,10 @@
       <nav>
         <ul>
           <li>
-            <a class="active" href="/">Home</a>
+            <a class="" href="/">Home</a>
           </li>
           <li>
-            <a class="" href="/knowledgehub.html">Knowledge Hub</a>
-          </li>
-          <li>
-            <a class="active" href="/live.html">Weather</a>
+            <a class="active" href="/knowledgehub.html">Knowledge Hub</a>
           </li>
         </ul>
       </nav>
@@ -54,6 +51,30 @@
     </header>
 
     <main>
+      <section id="weather" class="weather-section">
+        <h2>Current Weather in Zaria</h2>
+        <a
+          class="weatherwidget-io"
+          href="https://forecast7.com/en/11d097d72/zaria/"
+          data-label_1="ZARIA"
+          data-label_2="WEATHER"
+          data-theme="original"
+          >ZARIA WEATHER</a
+        >
+        <script>
+          !(function (d, s, id) {
+            var js,
+              fjs = d.getElementsByTagName(s)[0];
+            if (!d.getElementById(id)) {
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "https://weatherwidget.io/js/widget.min.js";
+              fjs.parentNode.insertBefore(js, fjs);
+            }
+          })(document, "script", "weatherwidget-io-js");
+        </script>
+      </section>
+
       <!-- Example articles -->
       <a class="article" href="article1.html">
         <img src="/img/article1.jpg" alt="cover-photo" />
