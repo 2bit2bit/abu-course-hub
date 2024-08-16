@@ -11,7 +11,7 @@ const validateLogin = async (req, res, next) => {
       isLoggedIn: false,
       errorMessage: err.message,
       oldInput: {
-        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
         password: req.body.password,
       },
     });
