@@ -18,7 +18,6 @@ cloudinary.config({
 
 const errorController = require("./controllers/error");
 const blogRoutes = require("./routes/blog");
-const donateRoutes = require("./routes/donate");
 const authRoutes = require("./routes/auth");
 const userRoute = require("./routes/user");
 
@@ -81,7 +80,6 @@ app.use((req, res, next) => {
 
 app.use(authRoutes);
 app.use(blogRoutes);
-app.use(donateRoutes);
 app.use(userRoute);
 app.use(errorController.get404);
 
