@@ -12,7 +12,7 @@
     flex-direction: column;
   }
   
-  .form input {
+  .form input, form select {
     margin-top: 4px;
     font-size: x-large;
     border-radius: 4px;

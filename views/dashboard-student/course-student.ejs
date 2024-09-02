@@ -1,0 +1,87 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/article.css">
+<link rel="stylesheet" href="/css/articles.css">
+<link rel="stylesheet" href="/css/my-articles.css">
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <img class='cover-photo'  src="/img/<%= course.department %>.jpg" alt="Cover Photo">
+        <h1><%= course.title %></h1>
+        <p class="details">
+            <span><i class='fas fa-layer-group'></i> <%= course.level %> level </span>                  
+            <span><i class='fas fa-calendar-alt'></i> <%= course.semester %> </span><br><br>
+            <span><i class='fas fa-tag'></i> <%= course.code %> </span>                  
+            <span style="color: gray;"><i class='fas fa-house'></i> <%= course.department %></span>
+        </p>
+        <!-- Conditional link for adding/removing course -->
+        <a class='edit-article' href="<%= added ? '/remove-course-student/' + course._id : '/add-course-student/' + course._id %>">
+            <%= added ? 'Remove Course' : 'Add Course' %>
+        </a>
+        <br><br>
+        <h4>Files </h4>
+        <br>
+        <div class="body" style="border: 2px solid rgba(236, 236, 236, 0.578); width: 100%; padding: 2rem; background-color: rgba(241, 241, 241, 0.567);">
+            <!-- Form for uploading materials -->
+            <div id="materials-list">
+                <% if (materials.length > 0) { %>
+                    <ul>
+                        <% materials.forEach(material => { %>
+                            <li id="material">
+                                <span class="material-title"><%= material.title %></span>
+                                <button class="icon-btn download-btn" data-url="<%= material.fileUrl %>">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <p>No materials available.</p>
+                <% } %>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addMaterialBtn = document.getElementById('add-material-btn');
+            const materialInput = document.getElementById('material-input');
+            const uploadMaterialForm = document.getElementById('upload-material-form');
+
+            if (addMaterialBtn && materialInput && uploadMaterialForm) {
+                addMaterialBtn.addEventListener('click', function () {
+                    materialInput.click();
+                });
+
+                materialInput.addEventListener('change', function () {
+                    uploadMaterialForm.submit();
+                });
+            } else {
+                console.error('One or more elements not found.');
+            }
+
+            const downloadButtons = document.querySelectorAll('.download-btn');
+
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const fileUrl = this.getAttribute('data-url');
+                    const filenameWithExt = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
+                    const filename = filenameWithExt.split('_')[1];
+                    fetch(fileUrl)
+                        .then(response => response.blob())
+                        .then(blob => {
+                            const objectUrl = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = objectUrl;
+                            a.download = filename;
+                            document.body.appendChild(a);
+                            a.click();
+                            a.remove();
+                            window.URL.revokeObjectURL(objectUrl);
+                        })
+                        .catch(err => console.error('Download failed', err));
+                });
+            });
+        });
+    </script>
+    <%- include('../includes/end.ejs') %>

@@ -1,0 +1,115 @@
+/* Ensure the body takes the full height */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0; /* Reset default margin */
+}
+
+/* Main Content Styles */
+main {
+  flex: 1;
+  padding: 1rem;
+  padding-bottom: 4rem; /* Space for the footer */
+  width: 100%;
+  max-width: 1200px; /* Limit width to avoid stretching too wide */
+  margin: auto;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #1c1c1c;
+  color: white;
+  text-align: center;
+  font-size: small;
+  color: #ccc;
+  padding: 1rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow above footer */
+}
+
+/* Footer Container Styles */
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Space between columns */
+  max-width: 1200px; /* Limit width to avoid stretching too wide */
+  margin: 0 auto; /* Center the footer container */
+}
+
+.footer-column {
+  flex: 1;
+  margin: 10px;
+  min-width: 200px;
+}
+
+.footer-column h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 5px;
+}
+
+.footer-column ul li a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #222;
+}
+
+.footer-bottom form {
+  margin: 10px 0;
+}
+
+.footer-bottom form input[type="email"] {
+  padding: 8px;
+  border-radius: 4px 0 0 4px;
+  border: none;
+  width: 250px;
+  max-width: 100%;
+}
+
+.footer-bottom form button {
+  padding: 8px;
+  border-radius: 0 4px 4px 0;
+  border: none;
+  background-color: #ff9900;
+  color: #fff;
+}
+
+.footer-bottom p {
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-column {
+    margin: 10px 0;
+    text-align: center;
+  }
+}

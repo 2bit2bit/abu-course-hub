@@ -1,112 +1,266 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+body main#index-main {
+  width: 100%;
 }
 
-main {
-    padding: 20px;
-}
-
-/* Hero Section */
 .hero {
-    text-align: center;
-    padding: 40px 20px;
+  position: relative;
+  height: 60vh; /* Adjust height as needed */
+  background-image: url("/img/hero-image.jpg");
+  background-size: cover;
+  background-position: center;
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
 }
 
-.logo-container {
-    margin-bottom: 20px;
+.hero-content {
+  max-width: 70%;
+  background-color: #171717a5;
+  padding: 3px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
-.logo {
-    max-width: 200px;
-    height: auto;
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
-.hero p {
-    font-size: 1.2em;
-    color: #555;
-    margin: 20px 0;
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  background-color: #ffffff;
+  color: #171717;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
-/* Sign-In & Login Buttons */
-.sign-in__login2 {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
+.cta-button:hover {
+  background-color: #969696;
 }
 
-.sign-in__login2 li {
-    margin: 0;
+.featured-courses,
+.how-it-works,
+.about-us,
+.testimonials,
+.cta,
+.latest-news,
+.impact {
+  padding: 2rem;
+  background-color: #fff;
+  margin-bottom: 1rem;
 }
 
-.sign-in__login2 a {
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-weight: bold;
-    color: white;
+.course-card,
+.news-article {
+  margin-bottom: 1rem;
 }
 
-.sign-in__login2 a.active,
-.sign-in__login2 a:hover {
-    background-color: #0056b3;
+.course-card img {
+  width: 100%;
+  height: auto;
 }
 
-.sign-in__login2 a.sign-up {
-    background-color: #007bff;
-}
-
-.sign-in__login2 a.sign-up.active,
-.sign-in__login2 a.sign-up:hover {
-    background-color: #0056b3;
-}
-
-.sign-in__login2 a:not(.sign-up) {
-    background-color: #28a745;
-}
-
-/* Features Section */
-.features {
-    display: flex;
-    justify-content: space-between;
-    margin: 40px 0;
-}
-
-.feature {
-    text-align: center;
-    flex: 1;
-    margin: 0 15px;
-}
-
-.feature i {
-    font-size: 3em;
-    color: #5cb85c;
-    margin-bottom: 10px;
-}
-
-.feature h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.feature p {
-    color: #555;
-    font-size: 1em;
-}
-
-/* Responsive Design for Mobile */
 @media (max-width: 768px) {
-    .features {
-        flex-direction: column;
-        align-items: center;
-    }
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
 
-    .feature {
-        margin: 20px 0;
-    }
+  .hero-content {
+    max-width: 100%;
+  }
+}
+
+/* How It Works Section */
+.how-it-works {
+  padding: 4rem 2rem;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+.how-it-works h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.how-it-works-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.how-it-works-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.how-it-works-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #1c1c1c;
+}
+
+.how-it-works-item p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.how-it-works-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .how-it-works-items {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .how-it-works-item {
+    flex: 1;
+    max-width: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .how-it-works-item {
+    flex: 1;
+    max-width: 100%;
+  }
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.testimonials h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.testimonials-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.testimonial {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.testimonial p {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0;
+}
+
+.testimonial-author {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #888;
+}
+
+.testimonial:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .testimonials-container {
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .testimonial {
+    flex: 1;
+    max-width: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonial {
+    max-width: 100%;
+  }
+}
+
+/* Our Impact Section */
+.impact {
+  padding: 4rem 2rem;
+  background-color: #f0f4f8;
+  text-align: center;
+}
+
+.impact h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.impact-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.impact-item {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 1;
+  max-width: 250px;
+  margin: 1rem;
+}
+
+.impact-item h3 {
+  font-size: 2rem;
+  color: #007bff;
+  margin: 0;
+}
+
+.impact-item p {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0.5rem 0 0;
+}
+
+.impact-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .impact-container {
+    flex-direction: column;
+    align-items: center;
+  }
 }

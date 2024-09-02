@@ -1,0 +1,48 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <% if (errorMessage && errorMessage !== []) { %>
+            <div class="errorMessage"><%= errorMessage %></div>
+        <% } %> 
+        <!-- Student Signup Form -->
+        <div id="Student" class="tab-content" style="display: block;">
+            <h4>Student Sign Up</h4>
+            <form class="auth-form" action="/signup-student" method="POST">
+                <div>
+                    <label for="regNumber">Registration Number</label>
+                    <input type="text" name="regNumber" id="regNumber" placeholder="Registration Number" minlength="1" maxlength="50" value="<%= oldInput.regNumber %>" required>
+                </div>
+                <div>
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" id="firstName" placeholder="First Name" minlength="1" maxlength="50" value="<%= oldInput.firstName %>" required>
+                </div>
+                <div>
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" id="lastName" placeholder="Last Name" minlength="1" maxlength="50" value="<%= oldInput.lastName %>" required>
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password" minlength="8" maxlength="50" value="<%= oldInput.password %>" required>
+                </div>
+                <div>
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" minlength="8" maxlength="50"  value="<%= oldInput.confirmPassword %>" required>
+                </div>
+                <button class="btn" type="submit">Sign Up</button>
+            </form>
+
+            <!-- Link to Lecturer Signup -->
+            <div class="signup-link">
+                <p>Not a student? <a href="/signup-lecturer">Sign up as a staff</a></p>
+            </div>
+        </div>
+        
+
+    </main>
+    <%- include('../includes/end.ejs') %>
+</body>
+</html>

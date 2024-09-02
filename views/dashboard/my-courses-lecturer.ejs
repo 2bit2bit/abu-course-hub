@@ -1,0 +1,28 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/articles.css">
+<link rel="stylesheet" href="/css/my-articles.css">
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <h4>Your Courses</h4>
+        <% for(var i = 0; i < courses.length; i++) { %>
+          <a class='article' href="/course-lecturer/<%= courses[i]._id %>">
+            <img class="cover-photo" src="/img/<%= courses[i].department %>.jpg" alt="Cover Photo">
+            <div class="detail">
+              <div>
+                <h3><%= courses[i].title %>  </h3>
+              </div>              
+              <div class="details">
+                <span><i class='fas fa-tag'></i> <%= courses[i].code %> </span>                  
+                <span><i class='fas fa-layer-group'></i> <%= courses[i].level %> level </span>                  
+                <span><i class='fas fa-calendar-alt'></i> <%= courses[i].semester %> </span>
+            </div>
+              <span style="color: gray;"><i class='fas fa-house'></i> <%= courses[i].department %></span>
+          </div>
+          
+          </a>
+      <% } %>
+    </main>
+<%- include('../includes/end.ejs') %>   

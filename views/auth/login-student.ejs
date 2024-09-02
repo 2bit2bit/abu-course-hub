@@ -9,10 +9,11 @@
         <% if (errorMessage) { %>
             <div class="errorMessage"><%= errorMessage %></div>
         <% } %>
-        <form class="auth-form" action="/login" method="POST">
+        <h4>Student Login</h4>
+        <form class="auth-form" action="/login-student" method="POST">
             <div>
-                <label for="phoneNumber">WhatsApp Number</label>
-                <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" value="<%= oldInput.phoneNumber %>">
+                <label for="regNumber">Registration Number</label>
+                <input type="text" name="regNumber" id="regNumber" placeholder="Registration Number" minlength="1" maxlength="50" value="<%= oldInput.regNumber %>" required>
             </div>
             <div>
                 <label for="password">Password</label>
@@ -21,8 +22,10 @@
 
             <button class="btn" type="submit">Login</button>
 
-            <!-- <a href="/reset-password">Forgot password?</a> -->
         </form>
+        <div class="signup-link">
+            <p>Not a student? <a href="/login-lecturer">Login as a Staff</a></p>
+        </div>
     </main>
 
 <%- include('../includes/end.ejs') %>

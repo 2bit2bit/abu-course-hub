@@ -1,0 +1,96 @@
+<%- include('./includes/head.ejs') %>
+<link rel="stylesheet" href="/css/home.css">
+
+</head>
+
+<body>
+    <%- include('./includes/nav.ejs') %>
+    <main id="index-main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome to ABU Course Hub</h1>
+                <p>Discover and access course materials and collaborate with peers at Ahmadu Bello University.</p>
+        
+                <% if (!isLoggedIn) { %>
+                    <a href="/signup-student" class="cta-button">Sign Up</a>
+                <% } %>
+        
+               
+                    <% if (role === 'student') { %>
+                        <a href="/all-course-student" class="cta-button">Explore Courses</a>
+                    <% } else if (role === 'lecturer') { %>
+                        <a href="/all-course-lecturer" class="cta-button">Explore Courses</a>
+                    <% } else if (role === '') { %>
+                        <a href="/login-student" class="cta-button">Explore Courses</a>
+                    <% } %>
+               
+            </div>
+        </section>
+        
+
+ 
+
+<!-- How It Works Section -->
+<section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="how-it-works-items">
+        <div class="how-it-works-item">
+            <h3>Sign Up</h3>
+            <p>Create an account to save your favorite courses, track your progress, and more.</p>
+        </div>
+        <div class="how-it-works-item">
+            <h3>Explore Courses</h3>
+            <p>Browse through a wide range of courses available at ABU and access the materials shared by lecturers.</p>
+        </div>        
+        <div class="how-it-works-item">
+            <h3>Access Materials</h3>
+            <p>Get access to lecture notes, assignments, and other course materials directly from the platform.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonials-container">
+        <div class="testimonial">
+            <p>"ABU Course Hub has transformed the way I access course materials. It's convenient and efficient!"</p>
+            <p class="testimonial-author">- Ephraim Yahaya - Student</p>
+        </div>
+        <div class="testimonial">
+            <p>"The platform has been a valuable tool for sharing resources with my students."</p>
+            <p class="testimonial-author">- Sarah Abel - Lecturer</p>
+        </div>
+        <div class="testimonial">
+            <p>"ABU Course Hub is a fantastic tool for both students and lecturers. Highly recommended!"</p>
+            <p class="testimonial-author">- Fatimah Idris - Student</p>
+        </div>
+    </div>
+</section>
+       
+
+        <!-- Impact Section -->
+       <!-- Our Impact Section -->
+<section class="impact">
+    <h2>Our Impact</h2>
+    <div class="impact-container">
+        <div class="impact-item">
+            <h3>500+</h3>
+            <p>Courses Available</p>
+        </div>
+        <div class="impact-item">
+            <h3>300+</h3>
+            <p>Students Registered</p>
+        </div>
+        <div class="impact-item">
+            <h3>100+</h3>
+            <p>Lecturers Engaged</p>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <%- include('./includes/end.ejs') %>
+

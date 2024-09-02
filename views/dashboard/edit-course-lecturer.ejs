@@ -1,0 +1,51 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/create-article.css">
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main>
+        <% if (errorMessage) { %>
+            <div class="errorMessage"><%= errorMessage %></div>
+        <% } %>
+          <form class="form" action="/edit-course-lecturer/<%= oldInput._id %>" method="POST"  enctype="multipart/form-data">   
+            <div>
+                <label for="title">Course Title:</label>
+                <input type="text" id="title" name="title" placeholder="Enter course title" value="<%= oldInput.title %>" required>
+            </div>
+            <div>
+                <label for="code">Course Code:</label>
+                <input type="text" id="code" name="code" placeholder="Enter course code" value="<%= oldInput.code %>" required>
+            </div>
+            <div>
+                <label for="semester">Semester:</label>
+                <select id="semester" name="semester" required>
+                    <option value="First Semester" <%= oldInput.semester === 'First Semester' ? 'selected' : '' %>>First Semester</option>
+                    <option value="Second Semester" <%= oldInput.semester === 'Second Semester' ? 'selected' : '' %>>Second Semester</option>
+                </select>
+            </div>
+            <div>
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department" placeholder="Enter department" value="<%= oldInput.department %>" required>
+            </div>
+            <div>
+                <label for="level">Level:</label>
+                <select id="level" name="level" required>
+                    <option value="" disabled selected>Select level</option>
+                    <option value="100" <%= oldInput.level === '100' ? 'selected' : '' %>>100 Level</option>
+                    <option value="200" <%= oldInput.level === '200' ? 'selected' : '' %>>200 Level</option>
+                    <option value="300" <%= oldInput.level === '300' ? 'selected' : '' %>>300 Level</option>
+                    <option value="400" <%= oldInput.level === '400' ? 'selected' : '' %>>400 Level</option>
+                    <option value="500" <%= oldInput.level === '500' ? 'selected' : '' %>>500 Level</option>
+                    <option value="600" <%= oldInput.level === '600' ? 'selected' : '' %>>600 Level</option>
+                    <option value="700" <%= oldInput.level === '700' ? 'selected' : '' %>>700 Level</option>
+                </select>
+            </div>
+            <div class="btns">
+                <button class="btn" type="submit">Update</button>
+            </div>
+        </form>
+    </main>
+
+    <%- include('../includes/end.ejs') %>
+</body>

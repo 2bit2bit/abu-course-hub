@@ -6,66 +6,71 @@
       <% if (!isLoggedIn) { %>
       <ul>
         <li>
-          <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
-        </li>
-        <li>
-          <a
-            class="<%= path === '/knowledgehub.html' ? 'active' : '' %>"
-            href="/knowledgehub.html"
-            >Knowledge Hub</a
-          >
+          <a class="<%= path === '/' ? 'active' : '' %>" href="/">About</a>
         </li>
       </ul>
       <ul class="sign-in__login">
         <li>
-          <a class="<%= path === '/login' ? 'active' : '' %>" href="/login"
+          <a
+            class="<%= path === '/login' ? 'active' : '' %>"
+            href="/login-student"
             >Login</a
           >
         </li>
         <li>
           <a
             class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>"
-            href="/signup"
+            href="/signup-student"
             >Sign Up</a
-          >
           >
         </li>
       </ul>
-      <% } else { %>
+      <% } else if (role === "lecturer") { %>
       <ul>
         <li>
           <a
-            class="<%= path === '/knowledgehub.html' ? 'active' : '' %>"
-            href="/knowledgehub.html"
-            >Knowledge Hub</a
-          >
-        </li>
-        <li>
-          <a
-            class="<%= path === '/articles' ? 'active' : '' %>"
-            href="/articles"
-            >All Products</a
+            class="<%= path === '/all-course-lecturer' ? 'active' : '' %>"
+            href="/all-course-lecturer"
+            >My Courses</a
           >
         </li>
       </ul>
       <ul class="sign-in__login">
         <li>
           <a
-            class="<%= path === '/create-article' ? 'sign-up active' : 'sign-up' %>"
-            href="/create-article"
+            class="<%= path === '/add-course-lecturer' ? 'sign-up active' : 'sign-up' %>"
+            href="/add-course-lecturer"
           >
             <i class="fas fa-pencil-alt"></i>
-            Add Product
+            Add Course
           </a>
+        </li>
+
+        <form action="/logout" method="post">
+          <button class="logout" type="submit">Logout</button>
+        </form>
+      </ul>
+      <% } else if (role === "student") { %>
+      <ul>
+        <li>
+          <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
         </li>
         <li>
           <a
-            class="<%= path === '/my-articles' ? 'active' : '' %>"
-            href="/my-articles"
+            class="<%= path === '/all-course-student' ? 'active' : '' %>"
+            href="/all-course-student"
+            >All Courses</a
           >
-            My Products
-          </a>
         </li>
+        <li>
+          <a
+            class="<%= path === '/my-course-student' ? 'active' : '' %>"
+            href="/my-courses-student"
+            >My Courses</a
+          >
+        </li>
+      </ul>
+      <ul class="sign-in__login">
         <form action="/logout" method="post">
           <button class="logout" type="submit">Logout</button>
         </form>
@@ -76,72 +81,80 @@
 
   <header>
     <a href="/" class="logo">
-      <img src="/img/farm2u-logo.png" alt="farm2u_logo" /><br />
+      <img src="/img/ABU-logo.png" alt="ABU-CourseHub_logo" /><br />
     </a>
-
     <nav>
       <% if (!isLoggedIn) { %>
       <ul>
         <li>
           <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
         </li>
-        <li>
-          <a
-            class="<%= path === '/knowledgehub.html' ? 'active' : '' %>"
-            href="/knowledgehub.html"
-            >Knowledge Hub</a
-          >
-        </li>
       </ul>
       <ul class="sign-in__login">
         <li>
-          <a class="<%= path === '/login' ? 'active' : '' %>" href="/login"
+          <a
+            class="<%= path === '/login' ? 'active' : '' %>"
+            href="/login-student"
             >Login</a
           >
         </li>
         <li>
           <a
             class="<%= path === '/signup' ? 'sign-up active' : 'sign-up' %>"
-            href="/signup"
+            href="/signup-student"
             >Sign Up</a
           >
         </li>
       </ul>
-      <% } else { %>
+      <% } else if (role === "lecturer") { %>
       <ul>
         <li>
-          <a
-            class="<%= path === '/knowledgehub.html' ? 'active' : '' %>"
-            href="/knowledgehub.html"
-            >Knowledge Hub</a
-          >
+          <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
         </li>
         <li>
           <a
-            class="<%= path === '/articles' ? 'active' : '' %>"
-            href="/articles"
-            >All Products</a
+            class="<%= path === '/all-course-lecturer' ? 'active' : '' %>"
+            href="/all-course-lecturer"
+            >My Courses</a
           >
         </li>
       </ul>
       <ul class="sign-in__login">
         <li>
           <a
-            class="<%= path === '/create-article' ? 'sign-up active' : 'sign-up' %>"
-            href="/create-article"
+            class="<%= path === '/add-course-lecturer' ? 'sign-up active' : 'sign-up' %>"
+            href="/add-course-lecturer"
           >
             <i class="fas fa-pencil-alt"></i>
-            Add Product
+            Add Course
           </a>
+        </li>
+
+        <form action="/logout" method="post">
+          <button class="logout" type="submit">Logout</button>
+        </form>
+      </ul>
+      <% } else if (role === "student") { %>
+      <ul>
+        <li>
+          <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
         </li>
         <li>
           <a
-            class="<%= path === '/my-articles' ? 'active' : '' %>"
-            href="/my-articles"
+            class="<%= path === '/all-course-student' ? 'active' : '' %>"
+            href="/all-course-student"
+            >All Courses</a
           >
-            My Products
-          </a>
         </li>
+        <li>
+          <a
+            class="<%= path === '/my-course-student' ? 'active' : '' %>"
+            href="/my-courses-student"
+            >My Courses</a
+          >
+        </li>
+      </ul>
+      <ul class="sign-in__login">
         <form action="/logout" method="post">
           <button class="logout" type="submit">Logout</button>
         </form>

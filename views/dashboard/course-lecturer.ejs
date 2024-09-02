@@ -1,0 +1,142 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/article.css">
+<link rel="stylesheet" href="/css/articles.css">
+<link rel="stylesheet" href="/css/my-articles.css">
+
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+    
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <img src="/img/loading.gif" alt="Loading..." class="loading-img">
+    </div>
+
+    <main>
+        <img class="cover-photo" src="/img/<%= course.department %>.jpg" alt="Cover Photo">
+        <h1><%= course.title %></h1>
+        <p class="details">
+            <span><i class='fas fa-layer-group'></i> <%= course.level %> level </span>                  
+            <span><i class='fas fa-calendar-alt'></i> <%= course.semester %> </span><br><br>
+            <span><i class='fas fa-tag'></i> <%= course.code %></span>                  
+            <span style="color: gray;"><i class='fas fa-house'></i> <%= course.department %></span>
+        </p>
+        <a class='edit-article' href="/edit-course-lecturer/<%= course._id %>">Edit</a>
+        <br><br>
+        <form id="delete-course-form" action="/delete-course-lecturer/<%= course._id %>" method="post">
+            <button class="delete-btn" type="submit" id="delete-course-btn">
+                Delete
+            </button>
+        </form>
+        <br>
+        <form id="upload-material-form" action="/add-material-lecturer/<%= course._id %>" method="post" enctype="multipart/form-data">
+            <input type="file" id="material-input" name="material" style="display:none;" required>
+            <button type="button" id="add-material-btn" class="upload-btn">Upload File</button>
+        </form>
+        <br><br>
+        <h4>Files </h4>
+        <br>
+        <div class="body" style="border: 2px solid rgba(236, 236, 236, 0.578); width: 100%; padding: 2rem; background-color: rgba(241, 241, 241, 0.567);">
+            <!-- Form for uploading materials -->
+            <div id="materials-list">
+                <% if (materials.length > 0) { %>
+                    <ul>
+                        <% materials.forEach(material => { %>
+                            <li id="material">
+                                <span class="material-title"><%= material.title %></span>
+                                <button class="icon-btn download-btn" data-url="<%= material.fileUrl %>">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <form action="/delete-material-lecturer/<%= material._id %>" method="get" class="delete-material-form" style="display:inline;">
+                                    <button type="submit" class="icon-btn delete-btn-mt">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <p>No materials available.</p>
+                <% } %>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const addMaterialBtn = document.getElementById('add-material-btn');
+            const materialInput = document.getElementById('material-input');
+            const uploadMaterialForm = document.getElementById('upload-material-form');
+            const deleteCourseForm = document.getElementById('delete-course-form');
+            const deleteMaterialForms = document.querySelectorAll('.delete-material-form');
+            const loadingOverlay = document.getElementById('loading-overlay');
+
+            // Ensure the elements exist
+            if (addMaterialBtn && materialInput && uploadMaterialForm && loadingOverlay) {
+                addMaterialBtn.addEventListener('click', function () {
+                    materialInput.click();
+                });
+
+                materialInput.addEventListener('change', function () {
+                    // Show the loading overlay
+                    loadingOverlay.style.display = 'flex';
+                    uploadMaterialForm.submit();
+                });
+            } else {
+                console.error('One or more elements not found.');
+            }
+
+            if (deleteCourseForm) {
+                deleteCourseForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    // Show the loading overlay
+                    loadingOverlay.style.display = 'flex';
+                    // Submit the form after a short delay to allow the overlay to be shown
+                    setTimeout(() => {
+                        this.submit();
+                    }, 100);
+                });
+            }
+
+            deleteMaterialForms.forEach(form => {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    // Show the loading overlay
+                    loadingOverlay.style.display = 'flex';
+                    // Submit the form after a short delay to allow the overlay to be shown
+                    setTimeout(() => {
+                        this.submit();
+                    }, 100);
+                });
+            });
+
+            const downloadButtons = document.querySelectorAll('.download-btn');
+
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const fileUrl = this.getAttribute('data-url');
+                    // Extract filename from URL
+                    const filenameWithExt = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
+                    const filename = filenameWithExt.split('_')[1];
+                   
+                    // Fetch the file from the server
+                    fetch(fileUrl)
+                        .then(response => response.blob())
+                        .then(blob => {
+                            const objectUrl = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = objectUrl;
+                            a.download = filename; // Use the extracted filename
+                            document.body.appendChild(a);
+                            a.click();
+                            a.remove();
+                            window.URL.revokeObjectURL(objectUrl); // Clean up the URL object
+                        })
+                        .catch(err => console.error('Download failed', err));
+                });
+            });
+        });
+    </script>
+
+    <%- include('../includes/end.ejs') %>

@@ -1,9 +1,29 @@
+
+
+h4 {
+  margin: auto;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  letter-spacing: 0.2rem;
+  color: grey;
+  text-align: center;
+}
+
+.signup-link {
+  margin: auto;
+  margin-top: 1rem;
+  text-align: center;
+}
+
 .auth-form {
   margin: auto;
   margin-top: 2rem;
-  max-width: 24rem;
+  max-width: 27rem;
   display: flex;
   flex-direction: column;
+  padding: 3rem 2rem;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.788);
 }
 
 .auth-form > * {
@@ -22,6 +42,7 @@
 
 .auth-form input:focus {
   outline: none;
+  border: 1px solid rgb(190, 228, 255);
 }
 
 .auth-form button {
@@ -38,6 +59,6 @@
 
 .auth-form button:hover,
 .auth-form button:active {
-    background-color: #1c1c1c;
-    border-radius: 2rem;
+  background-color: #1c1c1c;
+  border-radius: 1rem;
 }
