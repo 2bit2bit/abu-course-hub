@@ -1,37 +1,33 @@
-#Farm2U Zaria
-![Getting Started](./public/img/farm2u-logo-big.png)
+# ABU Course Hub
 
+ABU Course Hub is a full-stack web application designed to help lecturers manage and share course materials with students at Ahmadu Bello University, Zaria. It is built with Node.js, Express.js, MongoDB, and EJS. The platform allows lecturers to create, edit, and delete course materials and resources. Students can view and download materials for their courses, with features like secure login, search, discussion section and more.
 
-Farm2U is a full-stack web app, design to help farmers sell their produce directly to consumers. It is built with Node.js, Express.js, MongoDB, and EJS. It allows farmers to create, edit, delete, publish, and unpublish articles they made. Both logged-in and not logged-in users can view all articles. Other features include adding a cover photo to the article, password reset, etc.
-
-It is a project for Software Engineering III course at Ahmadu Bello University, Zaria.
+This project was developed for the Web programming course at 500l - 2nd semester - Computer Engineering - Ahmadu Bello University, Zaria.
 
 ## Installation
 
-Fork and Clone this repo
+Fork and Clone this repository.
 
-1. Go to the project directory and run 
+1. Go to the project directory and run:
     ```bash
     npm install
     ```
-    to instal dependencies
+    to install dependencies.
 
-2. Add environment variables
+2. Add environment variables:
    
-   - PORT
-   - MONGODB_URI
-   - SESSION_SECRET
-   - CLOUD_NAME
-   - CLOUDINARY_API_KEY
-   - CLOUDINARY_API_SECRET
-   - CLOUDINARY_URL
+   - `PORT`
+   - `MONGODB_URI`
+   - `SESSION_SECRET`
+   - `AWS_ACCESS_KEY_ID`
+   - `AWS_SECRET_ACCESS_KEY`
  
-  
-3. Start the app
+3. Start the app:
     ```bash
     npm start
     ```
-4. Vsit the URL from your browser
+
+4. Visit the URL from your browser.
 
 ## License
 

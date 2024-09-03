@@ -17,7 +17,6 @@ const config = {
 };
 
 const errorController = require("./controllers/error");
-const blogRoutes = require("./routes/blog");
 const dashboardLecturerRoutes = require("./routes/dashboard-lecturer");
 const dashboardStudentRoutes = require("./routes/dashboard-student");
 
@@ -94,7 +93,6 @@ app.get("/", (req, res) => {
 app.use(authRoutes);
 app.use(dashboardLecturerRoutes);
 app.use(dashboardStudentRoutes);
-app.use(blogRoutes);
 app.use(errorController.get404);
 
 app.use((error, req, res, next) => {
