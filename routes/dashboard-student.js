@@ -16,4 +16,5 @@ router.get(
   dashboardController.removeCourseStudent
 ); // remove a specific course
 
+router.post("/comment/:id", dashboardController.postComment); // Post a comment
 module.exports = router;

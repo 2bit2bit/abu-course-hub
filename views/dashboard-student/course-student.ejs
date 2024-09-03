@@ -7,12 +7,12 @@
 <body>
     <%- include('../includes/nav.ejs') %>
     <main>
-        <img class='cover-photo'  src="/img/<%= course.department %>.jpg" alt="Cover Photo">
+        <img class='cover-photo' src="/img/<%= course.department %>.jpg" alt="Cover Photo">
         <h1><%= course.title %></h1>
         <p class="details">
-            <span><i class='fas fa-layer-group'></i> <%= course.level %> level </span>                  
+            <span><i class='fas fa-layer-group'></i> <%= course.level %> level </span>
             <span><i class='fas fa-calendar-alt'></i> <%= course.semester %> </span><br><br>
-            <span><i class='fas fa-tag'></i> <%= course.code %> </span>                  
+            <span><i class='fas fa-tag'></i> <%= course.code %> </span>
             <span style="color: gray;"><i class='fas fa-house'></i> <%= course.department %></span>
         </p>
         <!-- Conditional link for adding/removing course -->
@@ -41,7 +41,37 @@
                 <% } %>
             </div>
         </div>
+
+        <!-- Discussion Section -->
+        <section id="discussion-section" style="margin-top: 2rem;">
+            <h4>Discussion</h4>
+            <div class="comment-box" style="border: 1px solid #ccc; padding: 1rem; background-color: #f9f9f9;">
+                <% comments.forEach(comment => { %>
+                    <div class="comment">
+                        <p>
+                            <strong><%= comment.name %> 
+                            <% if (comment.role === 'lecturer') { %>
+                                <i class="fas fa-check-circle" style="color: green;"></i>
+                            <% } %>
+                            </strong> 
+                            <span style="color: gray;"> - <%= new Date(comment.date).toLocaleDateString('en-GB') %></span>
+                        </p>
+                        <p><%= comment.text %></p>
+                    </div>
+                <% }) %>
+            </div>
+
+            <!-- Add Comment Form -->
+            <form id="comment-form" action="/comment/<%= course._id %>" method="POST" style="margin-top: 1.5rem;">
+                <div class="form-group">
+                    <textarea name="comment" id="comment" rows="4" class="form-control" placeholder="Add your comment here..." required></textarea>
+                </div>
+                <input type="hidden" name="courseId" value="<%= course._id %>">
+                <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem;">Submit Comment</button>
+            </form>
+        </section>
     </main>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const addMaterialBtn = document.getElementById('add-material-btn');

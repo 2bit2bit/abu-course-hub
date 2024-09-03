@@ -6,7 +6,7 @@ const validateSignupLecturer = async (req, res, next) => {
     next();
   } catch (err) {
     return res.status(422).render("auth/signup-lecturer", {
-      pageTitle: "Sign Up - lecturer",
+      pageTitle: "Sign Up - Lecturer",
       path: "/signup-lecturer",
       isLoggedIn: false,
       errorMessage: err.message,
@@ -22,11 +22,14 @@ const validateSignupLecturer = async (req, res, next) => {
 };
 
 const signupValidator = Joi.object({
-  staffID: Joi.string().trim().min(1).max(50).required().messages({
-    "string.empty": "Staff ID is required",
-    "string.min": "Staff ID must be at least 1 character long",
-    "string.max": "Staff ID must be less than or equal to 50 characters",
-  }),
+  staffID: Joi.string()
+    .trim()
+    .pattern(/^p\d{5}$/)
+    .required()
+    .messages({
+      "string.empty": "Staff ID is required",
+      "string.pattern.base": "Invalid Staff ID",
+    }),
 
   firstName: Joi.string().trim().min(1).max(50).required().messages({
     "string.empty": "First Name is required",

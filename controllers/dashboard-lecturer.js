@@ -1,7 +1,7 @@
 const { default: mongoose } = require("mongoose");
 const Material = require("../models/material"); // Adjust the path as necessary
 const Course = require("../models/course"); // Adjust the path to your Course model
-
+const Comment = require("../models/comment"); // Adjust the path as needed
 
 exports.getDahsboardLecturer = async (req, res, next) => {
   try {
@@ -106,6 +106,7 @@ exports.getCourseLecturer = async (req, res, next) => {
   try {
     const course = await Course.findById(courseId);
     const materials = await Material.find({ course: courseId });
+    const comments = await Comment.find({ courseId: courseId }); // Assuming `Comment` is the model for comments
 
     if (!course) {
       return res.status(404).render("404", {
@@ -130,6 +131,7 @@ exports.getCourseLecturer = async (req, res, next) => {
         level: course.level,
       },
       materials: materials, // Pass materials to the view
+      comments: comments, // Pass comments to the view
     });
   } catch (err) {
     const error = new Error(err);

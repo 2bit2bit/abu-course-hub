@@ -22,12 +22,14 @@ const validateSignupStudent = async (req, res, next) => {
 };
 
 const signupValidator = Joi.object({
-  regNumber: Joi.string().trim().min(1).max(50).required().messages({
-    "string.empty": "Registration Number is required",
-    "string.min": "Registration Number must be at least 1 character long",
-    "string.max":
-      "Registration Number must be less than or equal to 50 characters",
-  }),
+  regNumber: Joi.string()
+    .trim()
+    .pattern(/^u\d{2}[a-zA-Z]{2}\d{4}$/)
+    .required()
+    .messages({
+      "string.empty": "Registration Number is required",
+      "string.pattern.base": "Invalid Registration Number",
+    }),
 
   firstName: Joi.string().trim().min(1).max(50).required().messages({
     "string.empty": "First Name is required",

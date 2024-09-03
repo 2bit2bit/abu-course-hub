@@ -7,20 +7,26 @@
     <%- include('../includes/nav.ejs') %>
     <main>
 
-        <form class="search" action="/all-course-student" method="get">
+        <form class="search" action="/all-course-student" method="get" id="filterForm">
+          <select name="semester" id="semester" onchange="document.getElementById('filterForm').submit()">
+            <option value="">All Semesters</option>
+            <option value="First Semester" <%= typeof semester !== 'undefined' && semester === 'First Semester' ? 'selected' : '' %>>First Semester</option>
+            <option value="Second Semester" <%= typeof semester !== 'undefined' && semester === 'Second Semester' ? 'selected' : '' %>>Second Semester</option>
+          </select>
+        
            <!-- Level Filter -->
             <div id="search-select">
-              <select name="level" id="level">
-                <option value="">Al Levels</option>
+              <select name="level" id="level" onchange="document.getElementById('filterForm').submit()">
+                <option value="">All Levels</option>
                 <option value="100" <%= typeof level !== 'undefined' && level === '100' ? 'selected' : '' %>>100 Level</option>
                 <option value="200" <%= typeof level !== 'undefined' && level === '200' ? 'selected' : '' %>>200 Level</option>
                 <option value="300" <%= typeof level !== 'undefined' && level === '300' ? 'selected' : '' %>>300 Level</option>
                 <option value="400" <%= typeof level !== 'undefined' && level === '400' ? 'selected' : '' %>>400 Level</option>
                 <option value="500" <%= typeof level !== 'undefined' && level === '500' ? 'selected' : '' %>>500 Level</option>
-            </select>
+              </select>
     
             <!-- Department Filter -->
-            <select name="department" id="department">
+            <select name="department" id="department" onchange="document.getElementById('filterForm').submit()">
               <option value="">All Departments</option>
               <option value="Computer Engineering" <%= typeof department !== 'undefined' && department === 'Computer Engineering' ? 'selected' : '' %>>Computer Engineering</option>
               <option value="Electrical Engineering" <%= typeof department !== 'undefined' && department === 'Electrical Engineering' ? 'selected' : '' %>>Electrical Engineering</option>
@@ -32,18 +38,17 @@
               <option value="Chemistry" <%= typeof department !== 'undefined' && department === 'Chemistry' ? 'selected' : '' %>>Chemistry</option>
               <option value="Biology" <%= typeof department !== 'undefined' && department === 'Biology' ? 'selected' : '' %>>Biology</option>
               <option value="Economics" <%= typeof department !== 'undefined' && department === 'Economics' ? 'selected' : '' %>>Economics</option>
-          </select>
-          
+            </select>
           
           </div>
           
             <div>
               <input type="text" name="title" id="search" placeholder="Search for course" value="<%= typeof title !== 'undefined' ? title : '' %>"> 
-          <button type="submit">Search</button>
+              <button type="submit">Search</button>
             </div>
           
-      </form>
-      <br>
+        </form>
+        <br>
 
         <% for(var i = 0; i < courses.length; i++) { %>
           <a class='article' href="/course-student/<%= courses[i]._id %>">
@@ -56,11 +61,10 @@
                 <span><i class='fas fa-tag'></i> <%= courses[i].code %> </span>                  
                 <span><i class='fas fa-layer-group'></i> <%= courses[i].level %> level </span>                  
                 <span><i class='fas fa-calendar-alt'></i> <%= courses[i].semester %> </span>
-            </div>
+              </div>
               <span style="color: gray;"><i class='fas fa-house'></i> <%= courses[i].department %></span>
-          </div>
-          
+            </div>
           </a>
-      <% } %>
+        <% } %>
     </main>
-<%- include('../includes/end.ejs') %>   
+<%- include('../includes/end.ejs') %>

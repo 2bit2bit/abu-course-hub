@@ -1,11 +1,11 @@
 const Course = require("../models/course");
 const Student = require("../models/student");
 const Material = require("../models/material"); // Adjust the path as necessary
-
+const Comment = require("../models/comment"); // Adjust the path as needed
 
 exports.getAllCourseStudent = async (req, res, next) => {
   try {
-    const { title, level, department } = req.query;
+    const { title, level, department, semester } = req.query;
 
     // Create a filter object
     const filter = {};
@@ -14,7 +14,7 @@ exports.getAllCourseStudent = async (req, res, next) => {
     if (title) {
       filter.$or = [
         { title: { $regex: title, $options: "i" } }, // Case-insensitive search in title
-        { code: { $regex: title, $options: "i" } }   // Case-insensitive search in course code
+        { code: { $regex: title, $options: "i" } }, // Case-insensitive search in course code
       ];
     }
     if (level) {
@@ -22,6 +22,9 @@ exports.getAllCourseStudent = async (req, res, next) => {
     }
     if (department) {
       filter.department = department;
+    }
+    if (semester) {
+      filter.semester = semester;
     }
 
     // Fetch filtered courses from the database
@@ -38,13 +41,13 @@ exports.getAllCourseStudent = async (req, res, next) => {
       title,
       level,
       department,
+      semester,
     });
   } catch (err) {
     console.error(err);
     next(new Error("Failed to fetch courses."));
   }
 };
-
 
 exports.getCourseStudent = async (req, res, next) => {
   const courseId = req.params.id;
@@ -54,6 +57,7 @@ exports.getCourseStudent = async (req, res, next) => {
     // Fetch the course with the specified ID
     const course = await Course.findById(courseId);
     const materials = await Material.find({ course: courseId });
+    const comments = await Comment.find({ course: courseId }); // Fetch comments for the course
 
     const student = await Student.findById(studentId).populate("courses");
     const added = student.courses.some(
@@ -78,6 +82,7 @@ exports.getCourseStudent = async (req, res, next) => {
       role: req.session.role,
       materials: materials, // Pass materials to the view
       added: added,
+      comments: comments, // Pass comments to the view
     });
   } catch (err) {
     console.error(err);
@@ -90,31 +95,32 @@ exports.getMyCoursesStudent = async (req, res, next) => {
 
   try {
     // Fetch the student with their courses
-    const student = await Student.findById(studentId).populate('courses').exec();
+    const student = await Student.findById(studentId)
+      .populate("courses")
+      .exec();
 
     if (!student) {
-      return res.status(404).render('404', {
-        pageTitle: 'Student Not Found',
-        path: '/404',
+      return res.status(404).render("404", {
+        pageTitle: "Student Not Found",
+        path: "/404",
         isLoggedIn: req.session.isLoggedIn,
         role: req.session.role,
       });
     }
 
     // Pass the student's courses to the view
-    res.render('dashboard-student/my-courses-student', {
-      pageTitle: 'My Courses',
-      path: '/my-course-student',
+    res.render("dashboard-student/my-courses-student", {
+      pageTitle: "My Courses",
+      path: "/my-course-student",
       courses: student.courses, // List of courses the student is enrolled in
       isLoggedIn: req.session.isLoggedIn,
       role: req.session.role,
     });
   } catch (err) {
     console.error(err);
-    next(new Error('Failed to fetch student courses.'));
+    next(new Error("Failed to fetch student courses."));
   }
 };
-
 
 exports.addCourseStudent = async (req, res, next) => {
   const courseId = req.params.id;
@@ -178,5 +184,39 @@ exports.removeCourseStudent = async (req, res, next) => {
   } catch (err) {
     console.error(err);
     next(new Error("Failed to remove course from student."));
+  }
+};
+
+exports.postComment = async (req, res, next) => {
+  try {
+    const courseId = req.params.id;
+    const role = req.session.role;
+    const { firstName, lastName } = req.session.user; // Assuming the user's first and last names are stored in the session
+
+    const name = `${firstName} ${lastName}`;
+    const text = req.body.comment;
+
+    // Create a new comment
+    const newComment = new Comment({
+      courseId,
+      name,
+      role,
+      text,
+    });
+
+    // Save the comment to the database
+    await newComment.save();
+
+    // Redirect based on role
+    if (role === "student") {
+      res.redirect(`/course-student/${courseId}`);
+    } else if (role === "lecturer") {
+      res.redirect(`/course-lecturer/${courseId}`);
+    } else {
+      throw new Error("Unknown role.");
+    }
+  } catch (err) {
+    console.error(err);
+    next(new Error("Failed to post comment."));
   }
 };
