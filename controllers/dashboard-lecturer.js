@@ -73,9 +73,9 @@ exports.postAddCourseLecturer = async (req, res, next) => {
 
 // Get all courses for the lecturer
 exports.getAllCourseLecturer = async (req, res, next) => {
-  const lecturerId = req.session.user._id;
   try {
-    const courses = await Course.find({ lecturer: { $in: [lecturerId] } });
+    const lecturerId = req.session.user._id;
+    const courses = await Course.find({ lecturers: { $in: [lecturerId] } });
     res.render("dashboard/my-courses-lecturer", {
       pageTitle: "All Courses - Lecturer",
       path: "/all-course-lecturer",
